@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+.form-center {
+  position: absolute !important;
+  left: 54%;
+  width: 35%;;
+}
+.App {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Nunito", sans-serif;
+  background-image: linear-gradient(90deg, #410076, #8820dd);
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+.filter-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.filter-link {
+  color: #61dafb;
+}
+.home,
+.products,
+.contact-us,
+.sign-up{
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.home {
+  background-image: url('./images/img-2.jpg');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  font-size: 50px;
+}
+
+
+.social-container {
+  padding: 25px 50px;
+  position: absolute;
+  padding-left: 50%;
+  padding: auto;
+  bottom: 0;
+  justify-content: space-evenly;
+  
+
+}
+a.social {
+
+  transition: transform 250ms;
+  display: inline-block;
+  color: white;
+  font-size: 2rem ;
+  /* margin-top: 50%; */
+  align-items: center;
+ 
+}
+a.social:hover {
+  transform: translateY(-2px);
+}
+a.youtube {
+  color: #eb3223;
+}
+
+a.facebook {
+  color: #0e57f7;
+}
+
+a.github {
+  color: #0e57f7;
+}
+
+a.instagram {
+  color: black;
+}
+
+.products {
+  background-image: url('./images/img-3.jpg');
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+.contact-us {
+  background-image: url('./images/img-4.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+.sign-up {
+  background-image: url('./images/img-2.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+.box {
+  width: 900px;
+  align-items: left;
+  height: auto;
+}
+
+.float_column {
+  float:left;
+  margin-right: 10px;
+  width: 500px;
+}
+
+.products{
+  max-width: 1200px;
+  width: 100%;
+  margin: 100px auto;
+  box-shadow: 0 0 5px #ccc;
+}

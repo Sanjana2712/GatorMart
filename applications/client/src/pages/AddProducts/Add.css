@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* blog previews / list */
+.blog-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+.blog-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+
+.create {
+  padding-right: 300px;
+  padding-left: 100px;
+  padding-bottom: 2rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.create label {
+  text-align: left;
+  display: block;
+  font-style: bold;
+  
+}
+.create h2 {
+  font-size: 25px;
+  color: #2f2f2f;
+  margin-bottom: 30px;
+}
+.create input, .create textarea, .create select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+.create button {
+  background: #1c1c1c;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  min-width: 38rem;
+  cursor: pointer;
+}
+
+.create button:hover {
+  background: #474747;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}

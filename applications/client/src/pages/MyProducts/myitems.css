@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+    
+}
+
+.myprod{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding:0rem 12rem 3rem 0rem;
+}
+.my-items-container {
+    display: flex;
+  }
+  
+  .content-container {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  .section-heading {
+    padding-top: 2.5rem;
+    color: black;
+    font-weight: bold;
+  }
+
+@media (min-width: 380px) {
+   .myprodcard h5{
+        margin-left: -30px;
+    }
+    h4{
+        padding-left: 6rem;
+    }
+    .myprodcard{
+        min-width: 10rem;
+        margin-left: 45px;
+    }
+    .responsiveButtons{
+        margin-left: 7px;
+        margin-top: 0.5rem;
+    }
+    .responsiveButtons1{
+        margin-top: 0.5rem;
+
+    }
+  }
+  @media (min-width: 550px) {
+    h4{
+        padding-left: 6rem;
+    }
+    .responsiveButtons{
+        margin-left: 7px;
+        margin-right: 10px;
+    }
+    .responsiveButtons1{
+        margin-left: 2px;
+        float: left;
+    }
+  }
+  @media (max-width: 650px) {
+    h4{
+        padding-left: 9rem;
+    }
+  }
+
+  @media (min-width: 651px) {
+    .myprod {
+      justify-content: space-between; /* Distribute cards evenly */
+      flex-wrap: wrap; /* Allow cards to wrap */
+      padding: 1rem;
+    }
+  
+    .myprodcard {
+      width: calc(87% - 2rem); 
+      margin: 1rem; 
+    }
+  
+    .myprodcard h5 {
+      padding: 1rem;
+    }
+  
+    .responsiveButtons,
+    .responsiveButtons1 {
+      width: auto; /* Reset width */
+      margin-right: 1rem; /* Adjust margin */
+    }
+  }
+  @media (min-width:1024px) {
+    .myprodcard{
+        min-height: 14rem;
+        min-width: 50rem;
+    }
+    h4{
+        padding-left: 12rem;
+    }
+  }
+  @media screen and (min-width:1300px) {
+    .myprodcard{
+        min-height: 14rem;
+        min-width: 53rem;
+    }
+    h4{
+        padding-left: 14rem;
+    }
+  }
+
+.myprodcard{
+padding: 1.2rem 1.5rem;
+border-radius: 1rem;
+box-shadow: 8px 8px 8px 5px rgba(0,0,0,0.1);
+border-color: black;
+color: black;
+transition: 0.17s;
+}
+.myprodcard:hover{
+    transform: scale(1.04);
+}
+.myprodcard h5{
+    padding: 1.6rem 1rem 0rem 2rem;
+}
+.myprodcard h4{
+    padding-top: 1rem;
+}
+.myprodcard p{
+    line-height: 150%;
+    font-size: medium;
+}
