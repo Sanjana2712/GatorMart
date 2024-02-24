@@ -1,3 +1,15 @@
+#old file
+node_modules/*
+.DS_Store
+./applications/server/node_modules/*
+./applications/client/node_modules/*
+**/.DS_Store
+node_modules
+./applications/server/.env
+./applications/client/.env
+.env
+
+
 # Logs
 logs
 *.log
