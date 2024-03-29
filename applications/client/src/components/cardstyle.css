@@ -22,11 +22,9 @@
   }
 
   .product-card {
-    width: 14.2rem !important; /* Set the desired width for the product card */
-    height: 17.8rem; /* Allow height to adjust based on content */
+    width: 15.7rem !important; 
+    height: 17.8rem;
     display: flex;
     flex-direction: column;
     border: rgb(220, 220, 220) solid 0.5px;
-     /* Add spacing between product cards */
-    /* Add other styles as needed */
   }

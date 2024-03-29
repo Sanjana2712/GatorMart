@@ -120,28 +120,50 @@ useEffect(() => {
           <h1 style={{ marginRight: '20px', flex: '1' }}>
             {item.product_name}
           </h1>
-          {fav ? (
-    <FavoriteIcon onClick={() => { removeFav(productId); }}
-      style={{color: '#a31919',cursor: 'pointer', width: '60px', height: '40px',marginTop: '-10px', marginRight:'35px'  }}
-    />
-  ) : (
-    <FavoriteBorderOutlinedIcon onClick={() => { handleFav(productId); }}
-      style={{ cursor: 'pointer', width: '60px', height: '40px',marginTop: '-10px', marginRight:'35px' }} onClick={() => { handleFav(productId); }}
-    />
-  )}
+         
         </div>
-        <p>${item.price}.00</p>
+        <p><b>Price: </b> ${item.price}.00</p>
         <p>{item.description}</p>
         <p><b>Pickup Address: </b>{item.pickup_addr}</p>
         <div style={{ marginBottom: '10px' }}>
           <ThumbnailDetails images={item.img_url} tab={nextTab} />
           {item.isDonation && <Chip label="Donation" size='small' style={{ marginRight: '6px', marginTop: '6px' }} />}
         </div>
-        {props.user !== item.listedBy &&
-          <Button style={{ backgroundColor: '#232323', width: '304px', height: '42px', marginTop: '25px' }} variant="contained">
-            Buy now
-          </Button>
-        }
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  {props.user !== item.listedBy && (
+    <Button
+      onClick={fav ? () => removeFav(productId) : () => handleFav(productId)}
+      style={{
+        backgroundColor: fav ? '#a31919' : '#232323',
+        width: '48%',
+        height: '42px',
+        marginTop: fav ? '25px' : '25px',
+        color: 'white',
+        textTransform: 'none'
+      }}
+      variant="contained"
+    >
+      {fav ? 'Remove from Favorites' : 'Add to Favorites'}
+    </Button>
+  )}
+
+  {props.user !== item.listedBy && (
+    <Button
+      style={{
+        backgroundColor: '#232323',
+        width: '48%',
+        height: '42px',
+        marginTop: '25px',
+        color: 'white',
+        textTransform: 'none'
+      }}
+      variant="contained"
+    >
+      Buy now
+    </Button>
+  )}
+</div>
+
       </div>
     </div>
   </div>
@@ -151,9 +173,3 @@ useEffect(() => {
 
 
 export default ProductInfo;
-
-//new model for favs
-// figure out array type in mongo 
-// send fav information while login to store in the session 
-// figure out fav and unfav logic /fav:product:id?user:id 
-// make sure a person cannot fav a thing twice ie  /

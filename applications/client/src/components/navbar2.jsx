@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import Divider from '@mui/material/Divider';
-import logo from '../images/logo2.png';
+import logo from '../images/logoo.png';
 import Button from '@mui/material/Button';
 import { createTheme ,ThemeProvider} from '@mui/material/styles'
 import {useState} from 'react'
@@ -73,14 +73,11 @@ function MYNavbar(props){
     };
 return (
 <Navbar bg="navbar navbar-light"  variant="success" expand="lg"  style={{backgroundColor: "#1C1C1C"}}> 
-  <Navbar.Brand href="/"><img src={logo} style={{maxWidth:'170px', marginLeft:'50px'}} alt='Gatormart'></img></Navbar.Brand>
-
+  <Navbar.Brand href="/"><img src={logo} style={{maxWidth:'150px', marginLeft:'30px'}} alt='Gatormart'></img></Navbar.Brand>
     <Nav className="me-auto">
       <h1  style={{fontSize:'30px', marginLeft:'420px',marginTop:'20px',fontWeight:'bold',color:'white'}}>Gatormart</h1> 
       </Nav>
-      
-      <ThemeProvider theme={theme}>
-      
+      <ThemeProvider theme={theme}>     
       {profile_url ? <div>
         <FavoriteIcon onClick={handleFav} style={{color:'white',cursor: 'pointer', width:'60px', height:'30px', marginRight:'6px'}}/>
       

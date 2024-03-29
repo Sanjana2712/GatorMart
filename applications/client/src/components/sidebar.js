@@ -13,6 +13,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
 import ListItemText from '@mui/material/ListItemText';
 import { Link, useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
+
 const drawerWidth = 280;
 
 const Sidebar = () => {
@@ -20,24 +21,25 @@ const Sidebar = () => {
   const listItemStyle = {
     display: 'flex',
     alignItems: 'center',
-   
     textDecoration: 'none',
     cursor: 'pointer',
+    marginBottom: '8px', // Add margin bottom between list items
   };
 
   const linkStyle = {
-    color: 'black', // Font color
-    fontSize: '1.1rem', // Font size
-    textDecoration: 'none', // Remove underline from link
+    color: 'black',
+    fontSize: '1.1rem',
+    textDecoration: 'none',
     '&:hover': {
-      backgroundColor: 'blue', // MUI default hover color
+      backgroundColor: 'blue',
     },
   };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Box sx={{
+      <Box
+        sx={{
           width: { sm: drawerWidth },
           flexShrink: { sm: 0 },
           borderRight: '0.5px solid #ccc',
@@ -46,68 +48,120 @@ const Sidebar = () => {
         aria-label="mailbox folders"
       >
         <div>
-        <Typography variant="h6" sx={{ my: 1,paddingLeft: '3rem',padding:'1rem', borderBottom: '0.5px solid #ccc',}}>
-       Dashboard
-      </Typography>
-        <List> 
-          <Link to="/profile" style={linkStyle}>
-        <ListItem
-              key="Account"
-              selected={location.pathname === '/profile'}
-              style={listItemStyle}
-            >
-              <AccountCircleIcon />
-              <Typography variant="h6" sx={{ fontSize: '1rem', color: 'black', marginLeft: '12px' }}>
+          <Typography
+            variant="h6"
+            sx={{
+              my: 1,
+              paddingLeft: '3rem',
+              padding: '1rem',
+              borderBottom: '0.5px solid #ccc',
+            }}
+          >
+            Dashboard
+          </Typography>
+          <List>
+            <Link to="/profile" style={linkStyle}>
+              <ListItem
+                key="Account"
+                selected={location.pathname === '/profile'}
+                style={listItemStyle}
+              >
+                <AccountCircleIcon />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: '1rem',
+                    color: 'black',
+                    marginLeft: '12px',
+                  }}
+                >
                   Account
                 </Typography>
-            </ListItem> </Link>
+              </ListItem>
+            </Link>
 
-          <ListItem key="Inbox" selected={location.pathname === '#'}>
-            <ChatIcon/>
-            <ListItemButton
-              component={Link}
-              to="/profile"
-            >
-              <ListItemText primary="Inbox" primaryTypographyProps={{fontSize: '16px'}} />
-            </ListItemButton>
-          </ListItem>
-            
-          <ListItem key="Listings" selected={location.pathname === '/MyItems'}>
-            <FormatListBulletedOutlinedIcon/>
-            <ListItemButton
-              
-              component={Link}
-              to="/MyItems"
-            >
-              <ListItemText primary="Listings" primaryTypographyProps={{fontSize: '16px'}}  />
-            </ListItemButton>
-          </ListItem>
+            <Link to="/profile" style={linkStyle}>
+              <ListItem
+                key="Inbox"
+                selected={location.pathname === '/'}
+                style={listItemStyle}
+              >
+                <ChatIcon />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: '1rem',
+                    color: 'black',
+                    marginLeft: '12px',
+                  }}
+                >
+                  Inbox
+                </Typography>
+              </ListItem>
+            </Link>
+            <Link to="/MyItems" style={linkStyle}>
+              <ListItem
+                key="Listings"
+                selected={location.pathname === '/MyItems'}
+                style={listItemStyle}
+              >
+                <FormatListBulletedOutlinedIcon />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: '1rem',
+                    color: 'black',
+                    marginLeft: '12px',
+                  }}
+                >
+                  Listings
+                </Typography>
+              </ListItem>
+            </Link>
 
-          <ListItem key="Favorites"  selected={location.pathname === '/favorites'}>
-            <DescriptionIcon/>
-            <ListItemButton
-              component={Link}
-              to="/favorites"
-            >
-              <ListItemText primary="Favorites" primaryTypographyProps={{fontSize: '16px'}}  />
-            </ListItemButton>
-          </ListItem>
+            <Link to="/favorites" style={linkStyle}>
+              <ListItem
+                key="Favorites"
+                selected={location.pathname === '/favorites'}
+                style={listItemStyle}
+              >
+                <DescriptionIcon />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: '1rem',
+                    color: 'black',
+                    marginLeft: '12px',
+                  }}
+                >
+                  Favorites
+                </Typography>
+              </ListItem>
+            </Link>
 
-          <ListItem key="Add Products"  selected={location.pathname === '/addproducts'}>
-            <StorefrontOutlinedIcon/>
-            <ListItemButton
-             
-              component={Link}
-              to="/addproducts"
-            >
-              <ListItemText primary="Sell" primaryTypographyProps={{fontSize: '16px'}}  />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-      </div>
+            <Link to="/addproducts" style={linkStyle}>
+              <ListItem
+                key="Add Products"
+                selected={location.pathname === '/addproducts'}
+                style={listItemStyle}
+              >
+                <StorefrontOutlinedIcon />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: '1rem',
+                    color: 'black',
+                    marginLeft: '12px',
+                  }}
+                >
+                  Sell
+                </Typography>
+              </ListItem>
+            </Link>
+          </List>
+          <Divider />
+        </div>
       </Box>
-      
     </Box>
   );
 };

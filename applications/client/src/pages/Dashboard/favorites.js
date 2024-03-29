@@ -71,29 +71,45 @@ const renderImage = (Product) => {
          </Carousel.Item>
        )});
   }
+// Inside the map function where you're rendering the product cards
+const myFav = myFavorites?.map((Product, i) => {
+  if (Product._id) {
+    return (
+      <div className='myprod' key={Product._id}>
+        <div
+          className='myprodcard'
+          style={{
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            width: '400px', // Fixed maximum width
+            padding: '0.5rem',
+            borderRadius: '8px',
+            margin: '0.5rem', // Add margin for spacing between cards
+            display: 'flex', // Make items inline
+          }}
+        >
+          <Carousel interval={null} style={{ height: '200px', width: '200px', marginRight: '1rem' }}>
+            {renderImage(Product)}
+          </Carousel>
+         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: '1' }}>
+  <h6 style={{ fontSize: '1rem', margin: '0.5rem 0' }}>{Product.product_name}</h6>
+  <h6 style={{ fontSize: '0.9rem', margin: '0.5rem 0' }}>Price: ${Product.price}</h6>
+  <p style={{ fontSize: '0.8rem', margin: '0.5rem 0' }}>{Product.description}</p>
+  <h6 style={{ fontSize: '0.8rem', margin: '0.5rem 0' }}>Category: {Product.product_type}</h6>
+  <p style={{ fontSize: '0.8rem', margin: '0.5rem 0', marginBottom: '0.5rem' }}><b>Pickup address:</b> {Product.pickup_addr}</p>
+ 
+  <DeleteIcon onClick={() => { removeFav(Product._id); }} style={{color:'black',marginLeft:'500px',fontSize:'1.6rem',cursor:'pointer'}}/>
+   
+</div>
+
+        </div>
+      </div>
+    )
+  }
+  return <React.Fragment key={Product._id} />;
+})
 
   
-  const myFav = myFavorites?.map((Product,i) => {
-    if (Product._id){
-      return (<div className='myprod'key={Product._id}>
-      <div className='myprodcard'  style={{justifyContent: 'center', alignItems:'center'}}>
-      <Carousel interval={null} style={{minHeight: '220px', maxHeight:'250px', maxWidth:'210px', float: "left", padding:"1rem 1rem 0rem"}}>
-  {renderImage(Product)}
-  </Carousel>
-       <h5>{Product.product_name}</h5>
-       <h6>Price: ${Product.price}</h6>
-         <p>{Product.description}</p>
-        <h6>Category: {Product.product_type}</h6>
-       <p><b>Pickup address:</b> {Product.pickup_addr}</p>
-       <DeleteIcon onClick={() => { removeFav(Product._id); }} style={{color:'black',marginLeft:'750px',fontSize:'2rem', marginTop:'0.8rem',cursor:'pointer'}}/>
-       <Link to={`/product/${Product._id}`}>
-        
-      <Button className='responsiveButtons'variant="contained" style={{float:"right",backgroundColor:"black",background:"black",color:'white',marginRight:'10px',paddingTop:'0.3rem',fontSize:'1.1rem'}}>View</Button></Link>
-        </div>
-     </div>)
-    } 
-    return < React.Fragment key ={Product._id}/>;
- })
 
 return(
   
