@@ -49,7 +49,7 @@ export default function SignUp(props) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://media.istockphoto.com/id/1220443914/vector/set-of-colorful-shopping-bags-isolated-on-the-purple-background.jpg?s=612x612&w=0&k=20&c=m6mvEUgScewU3YmaiFZGEtGzi6OebDkpTNswCL8jJtg=)',
+            backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/002/788/700/original/woman-shopping-online-on-laptop-illustration-online-store-payment-bank-credit-cards-digital-pay-technology-e-paying-flat-style-modern-illustration-vector.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
