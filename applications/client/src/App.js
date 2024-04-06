@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
+import Verify from "./pages/Login/Verify";
 import SignUp from "./pages/SignUp/SignUp";
 import Profile from "./pages/Dashboard/profile"
 import Favorites from "./pages/Dashboard/favorites"
@@ -27,7 +28,8 @@ function App() {
         <Route path='/favorites' element={<Favorites />} />
        <Route path="/addproducts" element={<AddProducts user={user} />} />
         <Route path="/product/:productId" element={<ProductInfo user={user}/>} />
-        <Route path="/MyItems" element={<MyItems user={user}/>} />
+        <Route path="/MyItems" element={<MyItems user={user}/>} />   
+        <Route path="/api/verify/:userId/:verificationToken" element={<Verify/>}/>
       </Routes>
       <Footer/>
     </Router>

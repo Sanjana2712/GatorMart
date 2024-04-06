@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import Divider from '@mui/material/Divider';
-import logo from '../images/logoo.png';
+import logo from '../images/logo2.png';
 import Button from '@mui/material/Button';
 import { createTheme ,ThemeProvider} from '@mui/material/styles'
 import {useState} from 'react'
@@ -73,9 +73,9 @@ function MYNavbar(props){
     };
 return (
 <Navbar bg="navbar navbar-light"  variant="success" expand="lg"  style={{backgroundColor: "#1C1C1C"}}> 
-  <Navbar.Brand href="/"><img src={logo} style={{maxWidth:'150px', marginLeft:'30px'}} alt='Gatormart'></img></Navbar.Brand>
+  <Navbar.Brand href="/"><img src={logo} style={{maxWidth:'10rem', marginLeft:'30px'}} alt='Gatormart'></img></Navbar.Brand>
     <Nav className="me-auto">
-      <h1  style={{fontSize:'30px', marginLeft:'420px',marginTop:'20px',fontWeight:'bold',color:'white'}}>Gatormart</h1> 
+      <h1  style={{fontSize:'30px', marginLeft:'430px',marginTop:'11px',fontWeight:'revert',color:'white'}}>Gatormart</h1> 
       </Nav>
       <ThemeProvider theme={theme}>     
       {profile_url ? <div>
@@ -140,7 +140,15 @@ return (
             <Logout fontSize="small" />
           </ListItemIcon>Logout</MenuItem>
     </Menu></div>
-      : <div><a href="/login"><Button style={{backgroundColor: '#E9EAE9', color: 'black', width:'100px',height:'40px', marginTop:'3px', fontWeight: 'bold', marginRight:'17px', borderRadius:'19px'}} variant="contained">Sign in</Button></a>
+      : <div><a href="/login"><Button style={{backgroundColor: '#191919', color: 'white', width:'98px',height:'39px', marginTop:'3px', fontWeight: 'bold', marginRight:'19px', borderRadius:'19px'}}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = 'white';
+        e.target.style.color = '#191919'; // Change text color to #191919 on hover
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = '#191919';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
+      }}>Login</Button></a>
      </div>}
       </ThemeProvider>
         

@@ -130,7 +130,7 @@ useEffect(() => {
           {item.isDonation && <Chip label="Donation" size='small' style={{ marginRight: '6px', marginTop: '6px' }} />}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-  {props.user !== item.listedBy && (
+  {props.user !== item.listedBy && user_id && (
     <Button
       onClick={fav ? () => removeFav(productId) : () => handleFav(productId)}
       style={{

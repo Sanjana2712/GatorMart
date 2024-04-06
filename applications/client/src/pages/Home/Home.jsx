@@ -195,7 +195,7 @@ const getAllProducts = useCallback(async () => {
    
     key='search'
     name='Search'
-    placeholder="Search…"
+    placeholder="Search"
     inputProps={{ 'aria-label': 'search' }}
     value={searchItem}
     onChange={(e)=>handleChangeSearch(e)}

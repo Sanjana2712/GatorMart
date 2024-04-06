@@ -23,7 +23,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   
   const handleSubmit = async (e) => {
-    const emailRe = /\S+@sfsu.edu/ 
+    const emailRe = /\S+@(sfsu\.edu|gmail\.com)/; 
     e.preventDefault();
 
     try{ if(emailRe.test(email) && (password)&& (email)){
