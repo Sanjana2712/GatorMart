@@ -66,7 +66,7 @@ export default function Login(props) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/002/788/700/original/woman-shopping-online-on-laptop-illustration-online-store-payment-bank-credit-cards-digital-pay-technology-e-paying-flat-style-modern-illustration-vector.jpg)',
+            backgroundImage: 'url(https://unblast.com/wp-content/uploads/2020/02/Mobile-Shopping-Illustration.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

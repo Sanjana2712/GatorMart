@@ -75,7 +75,7 @@ return (
 <Navbar bg="navbar navbar-light"  variant="success" expand="lg"  style={{backgroundColor: "#1C1C1C"}}> 
   <Navbar.Brand href="/"><img src={logo} style={{maxWidth:'10rem', marginLeft:'30px'}} alt='Gatormart'></img></Navbar.Brand>
     <Nav className="me-auto">
-      <h1  style={{fontSize:'30px', marginLeft:'430px',marginTop:'11px',fontWeight:'revert',color:'white'}}>Gatormart</h1> 
+      <h1  style={{fontSize:'27px', marginLeft:'430px',padding:'9px',marginTop:'4px',marginBottom:'4px', fontWeight:'bold',color:'white'}}>Gatormart</h1> 
       </Nav>
       <ThemeProvider theme={theme}>     
       {profile_url ? <div>
