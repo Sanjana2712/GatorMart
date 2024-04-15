@@ -1,0 +1,22 @@
+.inboxcontainer {
+  min-width: 300px;
+  max-width: 320px;
+}
+.chat {
+  margin: 3px;
+  display: flex;
+  height: 70px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+.chat:hover {
+  background-color: #1c1c1c;
+  color: white;
+}
