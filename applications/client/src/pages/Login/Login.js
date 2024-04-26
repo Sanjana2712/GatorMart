@@ -58,15 +58,15 @@ export default function Login(props) {
   };
 
   return (
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '90vh' }}>
         <CssBaseline />
         <Grid
           item
           xs={false}
-          sm={4}
+          sm={5}
           md={7}
           sx={{
-            backgroundImage: 'url(https://unblast.com/wp-content/uploads/2020/02/Mobile-Shopping-Illustration.jpg)',
+            backgroundImage: 'url(https://cdn.dribbble.com/users/2726519/screenshots/6976043/media/616c902983e025f8a72f9d851cd36f62.png?resize=1600x1200&vertical=center)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -74,23 +74,26 @@ export default function Login(props) {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={0} square>
+          
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              my: 15,
+              mx: 8,
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
+              alignItems:'center'
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'black' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
+             <Avatar sx={{ m: 1.5, bgcolor: 'black' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+        
+          <Typography component="h1" variant="h5" style={{fontSize:"1.3rem"}}>
+            Sign In
+          </Typography>
+            
+            <form onSubmit={handleSubmit} sx={{ mt: 1}} style={{paddingTop:"0.8rem"}}>
               <TextField
                 margin="normal"
                 fullWidth
@@ -110,27 +113,27 @@ export default function Login(props) {
                 id="password"
                 onChange={(e)=> setPassword(e.target.value)} required
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> 
+            
               <Button
                 type="submit"
                 onClick={handleSubmit}
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor:'black'}}
+                sx={{ mt: 3, mb: 2, bgcolor:'black', '&:hover': {
+                  bgcolor: '#d6571c', // Change to the desired hover color
+                },}}
+                
               >
-                Sign In
+               Login
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" style={{textDecoration:"none", color:"black"}}>
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/SignUp" variant="body2">
+                  <Link href="/SignUp" variant="body2" style={{textDecoration:"underline black", color:"black"}}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

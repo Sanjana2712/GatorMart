@@ -73,7 +73,7 @@ export default function SignUp(props) {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://unblast.com/wp-content/uploads/2020/02/Mobile-Shopping-Illustration.jpg)',
+          backgroundImage: 'url(https://cdn.dribbble.com/users/9239898/screenshots/16501240/media/d2d9e2dba1ffc87b4664dbdbf5d6f5aa.png?resize=1600x1200&vertical=center)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) =>
             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -81,11 +81,11 @@ export default function SignUp(props) {
           backgroundPosition: 'center',
         }}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={4} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={2} square>
         <Box
           sx={{
-            my: 8,
-            mx: 4,
+            my: 9,
+            mx: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -95,7 +95,7 @@ export default function SignUp(props) {
             <LockOpenIcon />
           </Avatar>
         
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" style={{fontSize:"1.3rem"}}>
             Sign Up
           </Typography>
 
@@ -145,25 +145,25 @@ export default function SignUp(props) {
               placeholder="Confirm Password"
             />
           
-          <Button
-  type="submit"
-  fullWidth
-  variant="contained"
-  sx={{
-    mt: 3,
-    mb: 2,
-    bgcolor: 'black',
-    '&:hover': {
-      bgcolor: '#355E3B', // Change to the desired hover color
-    },
-  }}
->
-  Verify email
-</Button>
+            <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              bgcolor: 'black',
+              '&:hover': {
+                bgcolor: '#3b086e', // Change to the desired hover color
+              },
+            }}
+          >
+            Verify email
+          </Button>
           </form>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link href="/login" variant="body2" style={{textDecoration:"underline black", color:"black"}}>
                 Already have an account? Sign in
               </Link>
             </Grid>

@@ -161,7 +161,7 @@ const getAllProducts = useCallback(async () => {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ display: { xs: 'none', sm: 'block' }, marginLeft:'45px' }}>
+          <Box sx={{ display: { xs: 'none', sm: 'block' }, marginLeft:'28px' }}>
             {navItems.map((item) => (
               <Button key={item} onClick={()=>updateCategories(item)} sx={{ color: '#2f2f2e', fontSize:'12.8px',fontWeight:'bold'}}>
                 {item}

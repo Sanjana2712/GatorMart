@@ -159,7 +159,7 @@ useEffect(() => {
       }}
       variant="contained"
     >
-      Buy now
+      Connect
     </Button>
   )}
 </div>
