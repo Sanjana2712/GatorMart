@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import List from '@mui/material/List';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
@@ -48,11 +49,11 @@ const Sidebar = () => {
         aria-label="mailbox folders"
       >
         <div>
+          
           <Typography
             variant="h6"
             sx={{
               my: 1,
-              paddingLeft: '3rem',
               padding: '1rem',
               borderBottom: '0.5px solid #ccc',
             }}

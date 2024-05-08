@@ -32,20 +32,18 @@ try{
     const Products = await Product.find({isSold:false, product_type:req.body.category,listedBy:{$nin:[req.body.user]}});
     return res.send(Products);
    }
-  
     }
     catch(err){
        return res.status(500).send(err);
         console.log(err);
 
     }
-//api for sending fav IDS, home page and prod cards use this api to transfer array of IDS
-//api for getting fav
 
 });
 
 router.post('/api/getFavID', async (req, res) => {
     try {
+        
         const user_id = req.body.user_id;
         const favorites = await Favorites.findOne({ user_id });
         return res.status(200).json({ status: 'success', products: favorites.products });

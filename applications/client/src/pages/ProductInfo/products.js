@@ -46,6 +46,7 @@ useEffect(() => {
  
   const handleFav= async(id)=>{
     try {
+      
       const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,userId:user_id} );
       if(addFav.data.status === 'success'){
        const updatedProductsArray = addFav.data.products;

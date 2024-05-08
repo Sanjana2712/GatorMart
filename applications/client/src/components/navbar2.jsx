@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useLocation } from 'react-router-dom'; // Import useLocation
 import Divider from '@mui/material/Divider';
-import logo from '../images/logoo.png';
+import logo from '../images/logo2.png';
 import Button from '@mui/material/Button';
 import { createTheme ,ThemeProvider } from '@mui/material/styles'
 import { useState } from 'react';
@@ -82,14 +82,15 @@ function MYNavbar(props) {
   const isLoginPage = location.pathname === '/login' || location.pathname === '/SignUp' ; // Check if the current page is the login page
 
   return (
-    <Navbar bg="navbar navbar-light" variant="success" expand="lg" style={{ backgroundColor: "#1C1C1C" }}>
-      <Navbar.Brand href="/"><img src={logo} style={{ maxWidth: '10rem', marginLeft: '30px' }} alt='Gatormart'></img></Navbar.Brand>
+    <Navbar bg="navbar navbar-light" variant="success" expand="lg" style={{ backgroundColor: "#191919" }}>
+      <Navbar.Brand href="/"><img src={logo} style={{ maxWidth: '9.5rem', marginLeft: '30px' }} alt='Gatormart'></img></Navbar.Brand>
       <Nav className="me-auto">
-        <h1 style={{ fontSize: '27px', marginLeft: '430px', padding: '15px', marginTop: '4px', marginBottom: '4px', fontWeight: 'bold', color: 'white' }}>Gatormart</h1>
+        <h1 style={{ fontSize: '27px', marginLeft: '430px', padding: '15px', marginTop: '4px', marginBottom: '4px', fontWeight: 'bold', color:"#191919" }}>.</h1>
       </Nav>
       <ThemeProvider theme={theme}>
         {profile_url ? (
           <div>
+            
             <FavoriteIcon onClick={handleFav} style={{ color: 'white', cursor: 'pointer', width: '60px', height: '30px', marginRight: '6px' }} />
 
             <Button
@@ -108,6 +109,7 @@ function MYNavbar(props) {
               onClose={handleClose}
               PaperProps={{
                 elevation: 0,
+                backgroundColor: '#191919', 
                 sx: {
                   overflow: 'visible',
                   filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
@@ -124,11 +126,11 @@ function MYNavbar(props) {
                     position: 'absolute',
                     top: 0,
                     right: 24,
-                    width: 20,
-                    height: 10,
+                    width: 17,
+                    height:17,
                     bgcolor: 'background.paper',
                     transform: 'translateY(-50%) rotate(45deg)',
-                    zIndex: 0,
+                    zIndex: 1,
                   },
                 },
               }}
