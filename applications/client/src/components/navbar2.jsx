@@ -2,12 +2,11 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useLocation } from 'react-router-dom'; // Import useLocation
+import { useLocation, useState } from 'react-router-dom'; // Import useLocation
 import Divider from '@mui/material/Divider';
 import logo from '../images/logo2.png';
 import Button from '@mui/material/Button';
 import { createTheme ,ThemeProvider } from '@mui/material/styles'
-import { useState } from 'react';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Settings from '@mui/icons-material/Settings';
@@ -59,10 +58,6 @@ function MYNavbar(props) {
     setAnchorEl(null);
   };
 
-  const handleCloseAddProducts = () => {
-    navigate('/addproducts')
-    setAnchorEl(null);
-  };
 
   const handleProfile = () => {
     navigate('/profile')
@@ -85,7 +80,7 @@ function MYNavbar(props) {
     <Navbar bg="navbar navbar-light" variant="success" expand="lg" style={{ backgroundColor: "#191919" }}>
       <Navbar.Brand href="/"><img src={logo} style={{ maxWidth: '9.5rem', marginLeft: '30px' }} alt='Gatormart'></img></Navbar.Brand>
       <Nav className="me-auto">
-        <h1 style={{ fontSize: '27px', marginLeft: '430px', padding: '15px', marginTop: '4px', marginBottom: '4px', fontWeight: 'bold', color:"#191919" }}>.</h1>
+        <h1 style={{ fontSize: '27px', marginLeft: '430px', padding: '15px', marginTop: '4px', marginBottom: '4px', fontWeight: 'bold', color:"white" }}>Gatormart</h1>
       </Nav>
       <ThemeProvider theme={theme}>
         {profile_url ? (

@@ -194,6 +194,9 @@ const sendVerificationEmail = async ({_id,email,uniqueString}, res) => {
     router.post('/api/userinfo', async (req, res) => {
         try{
             const userInfo = await User.findById(req.body.userId);
+            if (!userInfo) { // Check if userInfo is null
+                return res.status(404).send({ message: 'User not found' });
+            }
             userInfo.password="";
             res.send(userInfo);}
             catch(err){

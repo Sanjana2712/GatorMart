@@ -11,12 +11,7 @@ require('dotenv/config');
 
 const { uploadFile, getFileStream } = require('../s3');
 
-
-
-
 // Middleware to parse JSON data
-
-
 
 router.post('/api/allproducts', async (req, res) => {
 try{
@@ -36,7 +31,6 @@ try{
     catch(err){
        return res.status(500).send(err);
         console.log(err);
-
     }
 
 });

@@ -1,12 +1,9 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Chip from '@mui/material/Chip';
-import { useEffect, useState, useCallback} from 'react';
+import { useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Redeem as GiftIcon } from '@mui/icons-material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './cardstyle.css';
@@ -41,7 +38,6 @@ function ProductCard(props) {
   const handleFav= async(id)=>{
     try {
       const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,userId:user_id} );
-      console.log(addFav.data);
       if(addFav.data.status === 'success'){
         const updatedProductsArray = addFav.data.products;
         props.setAllFav(updatedProductsArray)
@@ -56,7 +52,6 @@ function ProductCard(props) {
   const removeFav=async(id)=>{
     try{
       const delFav=await axios.post('http://localhost:4000/api/deleteFav',{user_id:user_id,productId:id});
-      console.log("I'm in the delete api");
       if(delFav.data.status === 'success'){
         const updatedArray = delFav.data.products;
         props.setAllFav(updatedArray);
@@ -66,13 +61,6 @@ function ProductCard(props) {
   }catch(error) {
     }
   }
-
-  const renderCampusPickupChip = () => {
-  
-    if (props.Product.isCampusPickup === true){
-    return <Chip label="On Campus" size='small' color="success"style={{background:'#76eab6',marginRight:'6px',marginTop:'6px'}} />};
-   
- }
 
   return (
    

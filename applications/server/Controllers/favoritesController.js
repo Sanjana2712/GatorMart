@@ -4,9 +4,6 @@ const router = express.Router();
 const fs = require('fs')
 const util = require('util')
 require('dotenv/config');
-
-
-
 router.post('/api/addFav', async (req, res) => {
     try {
         const productID = req.body.productId;
@@ -34,7 +31,6 @@ router.post('/api/addFav', async (req, res) => {
         const productID = req.body.productId;
         const userID=req.body.user_id; 
         // Find the Favorites document by user_id and update it to remove productID
-        console.log("im in delete api");
         const favorites = await Favorites.findOne({userID:userID});
         console.log(favorites.products);
         console.log(productID);

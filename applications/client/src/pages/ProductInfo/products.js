@@ -1,16 +1,10 @@
-import React,{useEffect,useState,useRef,useCallback}from 'react';
+import React,{useEffect,useState}from 'react';
 import Button from '@mui/material/Button';
 import './productdetails.css'
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import ThumbnailDetails from '../../components/ThumbnailDetails';
-import { color } from '@mui/system';
 import axios from 'axios';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useParams, Link } from "react-router-dom";
 import Chip from '@mui/material/Chip';
-import Avatar from '@mui/material/Avatar';
 
 function ProductInfo(props) {
   const [fav, setFav] = useState(false);
@@ -63,7 +57,6 @@ useEffect(() => {
   const removeFav=async(id)=>{
     try{
       const delFav=await axios.post('http://localhost:4000/api/deleteFav',{user_id:user_id,productId:id});
-      console.log("I'm in the delete api");
       if(delFav.data.status === 'success'){
         const updatedArray = delFav.data.products;
         setFavorites(updatedArray);
