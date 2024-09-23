@@ -19,6 +19,46 @@ export default function Inbox() {
           <h5>Lakshay Mittal</h5>
         </div>
         <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
+        <div className="chat">
+          <Avatar sx={{ width: 56, height: 56 }}>H</Avatar>
+          <h5>Lakshay Mittal</h5>
+        </div>
+        <hr></hr>
       </div>
     </>
   );

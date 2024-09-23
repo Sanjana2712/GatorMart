@@ -14,7 +14,7 @@ export default function footer() {
             <MDBCol md='3' lg='4' xl='3' className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
               
-                © 2023 Gatormart
+                © 2024 Gatormart
               </h6>
               <p>
                 Gatormart is the perfect online auction marketplace, both for SFSU students as well as the rest of the world. Something you want to sell? We got you! Or maybe you need to buy something brand new? Leverage the Gatormart platform. Don't want to meet at shady places? Make sure all your pickups are on campus!

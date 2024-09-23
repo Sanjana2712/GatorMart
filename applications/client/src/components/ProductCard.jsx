@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Chip from '@mui/material/Chip';
-import { useEffect, useState, useCallback} from 'react';
+import { useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Redeem as GiftIcon } from '@mui/icons-material';
 import FavoriteIcon from '@mui/icons-material/Favorite';

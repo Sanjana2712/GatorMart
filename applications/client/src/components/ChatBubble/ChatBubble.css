@@ -1,0 +1,28 @@
+.chat-bubble {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 5px 0;
+    position: relative;
+    word-wrap: break-word;
+  }
+  
+  .user {
+    background-color: #dcf8c6; 
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  
+  .friend {
+    background-color: #f1f0f0; 
+    align-self: flex-start;
+  }
+  
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto;
+    height: 500px; 
+  }
+  
