@@ -11,4 +11,4 @@ Frontend Framework: React.js
 Additional Packages: Slugify, mongoose, react components etc.
 IDE: VS Code
 
-Link for repository - https://github.com/mittallakshayy/Gatormart/tree/V2
+Link for repository - https://github.com/mittallakshayy/SFSU-Gatormart/tree/main
