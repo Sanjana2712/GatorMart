@@ -10,7 +10,7 @@ router.post('/api/addFav', async (req, res) => {
         const userID=req.body.user_id;
         let favoritesEntry = await Favorites.findOne({ userID });
         if (!favoritesEntry) {
-          favoritesEntry = new Favorites({ userId, products: [productID] });
+          favoritesEntry = new Favorites({ userID, products: [productID] });
           await favoritesEntry.save();
         } else {
           if (!favoritesEntry.products.includes(productID)) {
