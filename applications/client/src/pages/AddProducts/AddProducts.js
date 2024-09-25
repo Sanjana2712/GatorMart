@@ -91,7 +91,7 @@ const AddProducts = () => {
       formData.append('isCampusPickup',pickup);
       formData.append('price',value);
       formData.append('pickup_addr',pickupAddr);
-      formData.append('listedBy',sessionStorage.getItem('user_id'));
+      formData.append('listedBy',localStorage.getItem('user_id'));
       const result = await axios.post('http://localhost:4000/api/addproduct',formData,{headers:{'Content-Type':'multipart/form-data'}});
       if(result.data.status === 'success'){
         displaySnackBar(result.data.status,result.data.message);

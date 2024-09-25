@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Alert } from "@mui/material";
 
 export default function Verify() {
   const { userId, verificationToken } = useParams();
@@ -16,7 +15,6 @@ export default function Verify() {
     const verifyUser = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/api/verify/${userId}/${verificationToken}`);
-        console.log("Verification response:", response.data);
         if (response.data.status) {
           setVerificationStatus(true);
           setTimeout(() => {
@@ -27,7 +25,6 @@ export default function Verify() {
         setVerificationStatus("error");
       }
     };
-
     verifyUser();
   }, [userId, verificationToken]);
 

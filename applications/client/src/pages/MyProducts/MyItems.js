@@ -22,7 +22,7 @@ function MyItems() {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType]= useState("");
-  const user_id= sessionStorage.getItem("user_id");
+  const user_id= localStorage.getItem("user_id");
   const [allProducts, setAllProducts] = useState(null);
   const [toggle, setToggle] =useState(false);
   

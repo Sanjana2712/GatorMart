@@ -9,7 +9,7 @@ import axios from 'axios';
 import './cardstyle.css';
 function ProductCard(props) {
   
-  const user_id = sessionStorage.getItem('user_id');
+  const user_id = localStorage.getItem('user_id');
   const [fav, setFav] = useState(false);  //to display favorited/unfavorited status
   
   useEffect(() => {
@@ -37,11 +37,11 @@ function ProductCard(props) {
 
   const handleFav= async(id)=>{
     try {
-      const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,userId:user_id} );
+      const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,user_id:user_id} );
       if(addFav.data.status === 'success'){
         const updatedProductsArray = addFav.data.products;
         props.setAllFav(updatedProductsArray)
-        sessionStorage.setItem('favoriteProducts', JSON.stringify(updatedProductsArray));
+        localStorage.setItem('favoriteProducts', JSON.stringify(updatedProductsArray));
         setFav(true);
       }else{
       } 
@@ -55,7 +55,7 @@ function ProductCard(props) {
       if(delFav.data.status === 'success'){
         const updatedArray = delFav.data.products;
         props.setAllFav(updatedArray);
-        sessionStorage.setItem('favoriteProducts', JSON.stringify(updatedArray));
+        localStorage.setItem('favoriteProducts', JSON.stringify(updatedArray));
         setFav(false);
     } else { }
   }catch(error) {

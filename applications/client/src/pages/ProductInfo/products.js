@@ -8,10 +8,10 @@ import Chip from '@mui/material/Chip';
 
 function ProductInfo(props) {
   const [fav, setFav] = useState(false);
-  const [favorites, setFavorites]= useState(sessionStorage.getItem('favoriteProducts'));
+  const [favorites, setFavorites]= useState(localStorage.getItem('favoriteProducts'));
   const [author, setAuthor] = useState({name:'',
   profile_url:'', });
-  const user_id = sessionStorage.getItem('user_id');
+  const user_id = localStorage.getItem('user_id');
   const [index, setIndex] = useState(0); 
   const nextTab = index => {
   setIndex(index);
@@ -40,16 +40,14 @@ useEffect(() => {
  
   const handleFav= async(id)=>{
     try {
-      
-      const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,userId:user_id} );
+      const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,user_id:user_id} );
       if(addFav.data.status === 'success'){
        const updatedProductsArray = addFav.data.products;
-       sessionStorage.setItem('favoriteProducts', JSON.stringify(updatedProductsArray));
+       localStorage.setItem('favoriteProducts', JSON.stringify(updatedProductsArray));
        setFavorites(updatedProductsArray);
        setFav(true);
       }else{ 
-      }
-      
+      } 
   } catch (error) {
    }
   }
@@ -60,21 +58,20 @@ useEffect(() => {
       if(delFav.data.status === 'success'){
         const updatedArray = delFav.data.products;
         setFavorites(updatedArray);
-        sessionStorage.setItem('favoriteProducts', JSON.stringify(updatedArray));
+        localStorage.setItem('favoriteProducts', JSON.stringify(updatedArray));
         setFav(false);
     } else { }
   }catch(error) {
     }
   }
 
-
   const getProductData = async () =>{
     const productResponse = await axios.post('http://localhost:4000/api/product',{productId:productId});
     setItem(productResponse.data)
     if(props.user !== null){
       if(props.user === productResponse.data.listedBy){
-        const name = sessionStorage.getItem('fullname');
-        const profile_url = sessionStorage.getItem('profile_url');
+        const name = localStorage.getItem('fullname');
+        const profile_url = localStorage.getItem('profile_url');
         setAuthor((prev)=>{
           return {...prev, name ,profile_url};
         });
@@ -87,14 +84,13 @@ useEffect(() => {
     } else{const userResponse = await axios.post('http://localhost:4000/api/userinfo',{userId:productResponse.data.listedBy});
     setAuthor(userResponse.data);
     }
-   
   }
+
   useEffect(()=>{
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     getProductData();
-    
-    
-  },[]);
+  });
+
   return (
     <div className="app">
     <div className="breadcrumb-container">

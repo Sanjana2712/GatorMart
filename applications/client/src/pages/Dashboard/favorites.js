@@ -9,47 +9,51 @@ import Sidebar from '../../components/sidebar';
 import Grid from '@mui/material/Unstable_Grid2';
 
 
-function Favorites() {
-  const user_id = sessionStorage.getItem("user_id");
-  const [myFavorites, setMyFavorites] = useState(null);
+function Favorites(props) {
+  const user_id = props.user;
+  const [myFavorites, setMyFavorites] = useState([]); 
 
- 
+  const getMyFav = useCallback(async () => {
+    if (!user_id) {
+        console.warn('User not logged in or user_id is missing.');
+        return;
+    }
+    try {
+        const response = await axios.post('http://localhost:4000/api/myFav', { user_id:user_id });
+        setMyFavorites(response.data); // Update local state
+    } catch (error) {
+        console.log('Error fetching favorites:', error);
+    }
+}, [user_id]);
+
+// Effect to fetch and set favorites
+useEffect(() => {
+    getMyFav(); // Fetch favorites on component mount or user change
+}, [user_id, getMyFav]);
+
   const removeFav = async (id) => {
       const updatedFavorites = myFavorites.filter(product => product._id !== id);
       setMyFavorites(updatedFavorites);
-      sessionStorage.setItem('favoriteProducts', JSON.stringify(updatedFavorites));
+      localStorage.setItem('favoriteProducts', JSON.stringify(updatedFavorites));
       try {
         const delFav = await axios.post('http://localhost:4000/api/deleteFav', { user_id: user_id, productId: id });
         const updatedArray = delFav.data.products;
-        console.log("Product deleted successfully. Remaining products are: ", updatedArray);
-        sessionStorage.setItem('favoriteProducts', JSON.stringify(updatedArray));       
+        localStorage.setItem('favoriteProducts', JSON.stringify(updatedArray));       
         if (delFav.data.status !== 'success') {
             // Optionally handle the failed deletion case
             console.error('Failed to delete favorite:', delFav.data.message);
             // restore the deleted item if the API call fails
             setMyFavorites([...updatedFavorites, myFavorites.find(product => product._id === id)]);
-            sessionStorage.setItem('favoriteProducts', JSON.stringify(myFavorites));
+            localStorage.setItem('favoriteProducts', JSON.stringify(myFavorites));
         }
     } catch (error) {
         console.error("Error deleting item:", error);
         // Restore the favorite item if there's an error
         setMyFavorites([...updatedFavorites, myFavorites.find(product => product._id === id)]);
-        sessionStorage.setItem('favoriteProducts', JSON.stringify(myFavorites));
+        localStorage.setItem('favoriteProducts', JSON.stringify(myFavorites));
     }
   };
 
-  const getMyFav = useCallback(async () => {
-    try {
-      const response = await axios.post('http://localhost:4000/api/myFav', { user_id: user_id });
-      setMyFavorites(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [user_id]);
-
-  useEffect(() => {
-    getMyFav();
-  }, [user_id]);
 
   const renderImage = (Product) => {
     return Product.img_url?.map((val, i) => {

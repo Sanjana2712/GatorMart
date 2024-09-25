@@ -13,10 +13,9 @@ import ProductInfo from "./pages/ProductInfo/products";
 import MyItems from "./pages/MyProducts/MyItems";
 import Footer from "./components/footer";
 
-
-
 function App() {
-  const [user, setUser]= useState(sessionStorage.getItem('user_id'));
+  const [user, setUser]= useState(localStorage.getItem('user_id'));
+
   return (
     <Router>
       <Navbar user={user} setUser={setUser} />
@@ -25,7 +24,7 @@ function App() {
         <Route path='/login' element={<Login setUser={setUser}/>} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/profile' element={<Profile user={user} />} />
-        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/favorites' element={<Favorites user={user}/>} />
        <Route path="/addproducts" element={<AddProducts user={user} />} />
         <Route path="/product/:productId" element={<ProductInfo user={user}/>} />
         <Route path="/MyItems" element={<MyItems user={user}/>} />   

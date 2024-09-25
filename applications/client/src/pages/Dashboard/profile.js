@@ -1,25 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import {useState, useContext, useEffect } from "react";
+import {useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Sidebar from '../../components/sidebar';
-import Button from 'react-bootstrap/esm/Button';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit'; // Import edit icon
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'; // Import camera icon
-
-
-const drawerWidth = 240;
 
 export default function Account(props) {
   let firstName =null;
-  firstName = sessionStorage.getItem('fullname');
+  firstName = localStorage.getItem('fullname');
   const [email, setEmail] = useState();
-  const [editProfile, setEditProfile] = React.useState(false);
-  const [profileUrl, setProfileUrl] = React.useState(sessionStorage.getItem('profile_url'));
+  const [profileUrl, setProfileUrl] = React.useState(localStorage.getItem('profile_url'));
   const handleEditClick = () => {
     document.getElementById('avatar-input').click();
   };
@@ -35,9 +27,8 @@ export default function Account(props) {
           formData.append('image',selected);
           formData.append('userId', props.user);
           const result = await axios.post('http://localhost:4000/api/imgupload',formData,{headers:{'Content-Type':'multipart/form-data'}});
-          console.log(result)
           setProfileUrl(result.data.api2_profile_url); 
-          sessionStorage.setItem('profile_url', result.data.api2_profile_url);
+          localStorage.setItem('profile_url', result.data.api2_profile_url);
 
         } catch (error) {
           console.error('Image upload error:', error);
@@ -48,7 +39,6 @@ export default function Account(props) {
 
 const getUserInfo = async (e) => {
   try{
-  
     const userResponse = await axios.post('http://localhost:4000/api/userinfo',{userId:props.user});
     setEmail(userResponse.data.email);
       }

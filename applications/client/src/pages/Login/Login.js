@@ -1,11 +1,9 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -16,30 +14,29 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showError, setShowError] = useState(false);
   const [email, setEmail]= useState("");
   const [password, setPassword] = useState("");
   
   const handleSubmit = async (e) => {
-    const emailRe = /\S+@(sfsu\.edu|gmail\.com)/; 
     e.preventDefault();
+    const emailRe = /\S+@(sfsu\.edu|gmail\.com)/; 
+    localStorage.clear();
 
-    try{ if(emailRe.test(email) && (password)&& (email)){
+    try{ 
+      if(emailRe.test(email) && (password)&& (email)){
       const response = await axios.post('http://localhost:4000/api/login',{
         email:email,
         password:password
       });
-      console.log(response)
       setShowError(false);
       if(response.data.status === 'success'){
-        sessionStorage.setItem('token',response.data.user);
-        sessionStorage.setItem('user_id',response.data.user_id);
-        sessionStorage.setItem('fullname',response.data.fullname);
-        sessionStorage.setItem('profile_url',response.data.profile_url);
-        navigate('/')
+        localStorage.setItem('token',response.data.user);
+        localStorage.setItem('user_id',response.data.user_id);
+        localStorage.setItem('fullname',response.data.fullname);
+        localStorage.setItem('profile_url',response.data.profile_url);
         props.setUser(response.data.user_id);
+        navigate('/')
        
       }
       else if(response.data.status==='error'){

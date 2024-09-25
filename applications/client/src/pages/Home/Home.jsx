@@ -16,7 +16,6 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import SearchIcon from '@mui/icons-material/Search';
 import Toolbar from '@mui/material/Toolbar';
 import ProductCard from '../../components/ProductCard';
@@ -72,10 +71,10 @@ export default function Home(props) {
   const [allFavID, setAllFavID] = useState(null);
   const[category,setCategory] = useState("All");
   const { window } = props;
-  const user_id=sessionStorage.getItem('user_id');
-  const searchInput = React.useRef(null);
+  const user_id=props.user;
   const [mobileOpen, setMobileOpen] = React.useState(false);
- 
+
+
   const updateCategories = (item) =>{
     setCategory(item); 
     setSearchItem('');
@@ -104,19 +103,25 @@ export default function Home(props) {
       </List>
     </Box>
   );
+
+//retrieves FavoriteIDs of user's favorited products
   const getAllFav = useCallback(async () => {
+    if (!user_id) {
+      console.warn('User not logged in or user_id is missing.');
+      return; // Exit if user_id is not present
+    }
     try {
         const response = await axios.post('http://localhost:4000/api/getFavID', {user_id:user_id});
-        sessionStorage.setItem('favoriteProducts', JSON.stringify(response.data.products));
+        localStorage.setItem('favoriteProducts', JSON.stringify(response.data.products));
         setAllFavID(response.data.products);
-        console.log("favorites IDs of the user is retrieved - Home.jsx", response.data.products);
   } catch (error) {
       console.log(error);
-   }},[props.user]);
+   }},[user_id]);
 
    useEffect(()=> {
     getAllFav();
   },[getAllFav]);
+
 
 const getAllProducts = useCallback(async () => {
     try {
@@ -126,7 +131,6 @@ const getAllProducts = useCallback(async () => {
       console.log(error)
   }
   },[category,props.user]);
-
   useEffect(()=> {
     getAllProducts();
   },[category,getAllProducts]);

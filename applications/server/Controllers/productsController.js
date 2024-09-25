@@ -37,9 +37,8 @@ try{
 
 router.post('/api/getFavID', async (req, res) => {
     try {
-        
-        const user_id = req.body.user_id;
-        const favorites = await Favorites.findOne({ user_id });
+        const userID = req.body.user_id;
+        let favorites = await Favorites.findOne({ userID:userID });
         return res.status(200).json({ status: 'success', products: favorites.products });
         
       } catch (error) {
@@ -49,8 +48,8 @@ router.post('/api/getFavID', async (req, res) => {
 
     router.post('/api/myFav', async (req, res) => {
         try {
-            const user_id = req.body.user_id;
-            const favorites = await Favorites.findOne({ user_id });
+            const userID = req.body.user_id;
+            const favorites = await Favorites.findOne({ userID:userID });
             if (!favorites) {
                 return res.status(404).send('No favorites found for the user');
             }
@@ -86,8 +85,8 @@ router.post('/api/myproducts', async (req, res) => {
                 res.status(500).send(err);
                 console.log(err);
             }
-        
         });
+
     router.post('/api/marksold', async (req, res) => {
         try{
             const updateResult = await Product.findByIdAndUpdate(req.body.productId, {isSold:true});

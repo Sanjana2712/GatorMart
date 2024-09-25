@@ -25,10 +25,10 @@ function MYNavbar(props) {
   const open = Boolean(anchorEl);
   let profile_url = null;
 
-  if (sessionStorage.getItem('profile_url') == null) {
+  if (localStorage.getItem('profile_url') == null) {
     profile_url = null;
   } else {
-    profile_url = sessionStorage.getItem('profile_url');
+    profile_url = localStorage.getItem('profile_url');
   }
 
   const theme = createTheme({
@@ -52,10 +52,16 @@ function MYNavbar(props) {
   };
 
   const handleCloseLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('fullname');
+    localStorage.removeItem('profile_url');
+
+    // You should also optionally clear session storage if you store anything related to the user
     sessionStorage.clear();
     props.setUser(null);
-    navigate('/')
     setAnchorEl(null);
+    navigate('/')
   };
 
 
