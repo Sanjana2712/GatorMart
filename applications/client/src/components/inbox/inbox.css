@@ -1,33 +1,8 @@
-/* .inboxcontainer {
-  min-width: 300px;
-  max-width: 320px;
-  height: 600px; 
-  overflow-y: auto; 
-}
-.chat {
-  margin: 3px;
-  padding: 3px;
-  display: flex;
-  height: 70px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-}
-
-hr {
-  margin: 0;
-  padding: 0;
-}
-.chat:hover {
-  background-color: #1c1c1c;
-  color: white;
-} */
 .inboxcontainer {
-  min-width: 300px;    /* Minimum width */
-  max-width: 22%;     /* Allow it to be responsive */
-  height: 700px; 
-  overflow-y: auto; 
+  min-width: 300px; /* Minimum width */
+  max-width: 22%; /* Allow it to be responsive */
+  height: 700px;
+  overflow-y: auto;
   box-sizing: border-box; /* Include padding and border in total width/height */
 }
 
@@ -48,6 +23,10 @@ hr {
 }
 
 .chat:hover {
+  background-color: #1c1c1c;
+  color: white;
+}
+.activeRoom {
   background-color: #1c1c1c;
   color: white;
 }

@@ -30,7 +30,9 @@ function App() {
           element={<ProductInfo user={user} />}
         />
         <Route path="/MyItems" element={<MyItems user={user} />} />
-        {user && <Route path="/inbox" element={<Chat user={user} />} />}
+        {user && (
+          <Route path="/inbox/:chatRoom" element={<Chat user={user} />} />
+        )}
       </Routes>
       <Footer />
     </Router>

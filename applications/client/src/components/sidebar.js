@@ -77,7 +77,7 @@ const Sidebar = () => {
 
             <ListItem key="Inbox" selected={location.pathname === "/inbox"}>
               <ChatIcon />
-              <ListItemButton component={Link} to="/inbox">
+              <ListItemButton component={Link} to="/inbox/default">
                 <ListItemText
                   primary="Inbox"
                   primaryTypographyProps={{ fontSize: "16px" }}
