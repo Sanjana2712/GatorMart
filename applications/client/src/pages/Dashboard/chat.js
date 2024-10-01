@@ -48,6 +48,14 @@ export default function Chat(props) {
     }
   }, [chatRoom, allChatRooms]);
 
+  const currentRoom = allChatRooms?.find((room) => room._id === activeRoom);
+
+  // Determine the other participant in the active chat room
+  const otherParticipant = currentRoom?.participants.find(
+    (participant) => participant._id !== user
+  );
+
+
   return (
     <div className="my-items-container">
       <div className="sidebar">
@@ -64,7 +72,7 @@ export default function Chat(props) {
           />
         </div>
         <div className="chat-container">
-          <ChatContainer socket={socket} activeRoom={activeRoom} user={user} />
+          <ChatContainer socket={socket} activeRoom={activeRoom} user={user}  otherParticipant={otherParticipant} />
         </div>
       </div>
     </div>
