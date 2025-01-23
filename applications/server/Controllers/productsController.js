@@ -101,6 +101,20 @@ router.post('/api/myproducts', async (req, res) => {
             }
         });
 
+        router.post('/api/markavail', async (req, res) => {
+            try{
+                const updateResult = await Product.findByIdAndUpdate(req.body.productId, {isSold:false});
+                if(updateResult === null){
+                return res.status(200).json({status:'warning', message:'Could not find this product' });
+                }
+                return res.status(200).json({status:'success', message:'Product properties updated successfully'  });
+            }
+                catch(err){
+                    console.log('reached here 5')
+                   return res.status(500).send("Unexpected Error Occured");
+                }
+            });
+
 router.post('/api/deleteproduct', async (req, res) => {
             try{
                 const deleteResult = await Product.findByIdAndDelete(req.body.productId);

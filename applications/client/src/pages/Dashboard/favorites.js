@@ -5,9 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Sidebar from '../../components/sidebar';
 import Grid from '@mui/material/Unstable_Grid2';
-
 
 function Favorites(props) {
   const user_id = props.user;
@@ -71,12 +71,12 @@ useEffect(() => {
   const myFav = myFavorites?.map((Product, i) => {
     if (Product._id) {
       return (
-        <Grid key={Product._id} item xs={12} md={4} lg={3} style={{ marginBottom: '5px', marginRight: '4rem' }}>
+        <Grid key={Product._id} item xs={12} md={4} lg={3} style={{ marginBottom: '5px', marginRight: '3rem' }}>
           <Card key={Product._id} style={{
             width: '16.9rem',
-            height: '19.8rem',
+            height: '18rem',
             border: 'rgb(220, 220, 220) solid 0.2px',
-            marginBottom: '2rem'
+            marginBottom: '1rem'
           }}>
             <Link to={`/product/${Product._id}`}>
               <Carousel interval={null} >
@@ -84,9 +84,19 @@ useEffect(() => {
               </Carousel>
             </Link>
             <Card.Body>
-              <Card.Title><h5 style={{ fontSize: "17px" }}>{Product.product_name} </h5> </Card.Title>
-              <h6>Price: ${Product.price}</h6>
-              <Button onClick={() => { removeFav(Product._id); }} variant="light" size='small' style={{ backgroundColor: "#3A3A39", color: 'white', width: '100px', fontSize: '13px' }}>Delete</Button>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <Card.Title style={{ margin: 0 }}>
+                  <h5 style={{ fontSize: "17px", margin: 0 , fontWeight:'bold' }}>{Product.product_name}</h5>
+                </Card.Title>
+                <Button 
+                  onClick={() => { removeFav(Product._id); }} 
+                  variant="light" 
+                  size='small' 
+                  style={{ color: 'darkred', cursor: 'pointer', background: 'none', border: 'none' }}>
+                  <FavoriteIcon/>
+                </Button>
+              </div>
+              <h6 style={{ margin: '1px 0 0', textAlign: 'left' }}>${Product.price}</h6>
             </Card.Body>
           </Card>
         </Grid>
@@ -94,15 +104,11 @@ useEffect(() => {
     }
     return null;
   })
-
   return (
     <div className="my-items-container">
       <Sidebar />
       <div className="content-container">
-        <Typography variant="h6" sx={{ my: 0, paddingLeft: '4rem', fontWeight: 'bold' }}>
-          Favorites
-        </Typography>
-        <Grid container spacing={3} style={{ paddingLeft: '4rem', paddingRight: '2rem', marginTop: '2rem' }}>
+        <Grid container spacing={3} style={{ paddingLeft: '4rem', paddingRight: '2rem', marginTop: '2.5rem' }}>
           {myFav}
         </Grid>
       </div>

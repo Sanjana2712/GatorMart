@@ -2,39 +2,40 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import List from '@mui/material/List';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import ChatIcon from '@mui/icons-material/ChatOutlined';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import DescriptionIcon from '@mui/icons-material/DescriptionOutlined';
 import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
-import ListItemText from '@mui/material/ListItemText';
 import { Link, useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const drawerWidth = 280;
 
 const Sidebar = () => {
   const location = useLocation();
+
   const listItemStyle = {
     display: 'flex',
     alignItems: 'center',
     textDecoration: 'none',
     cursor: 'pointer',
-    marginBottom: '8px', // Add margin bottom between list items
+    padding: '12px 16px',
+    marginBottom: '8px',
+    borderRight: '4px solid transparent', // Default transparent border
   };
 
   const linkStyle = {
     color: 'black',
     fontSize: '1.1rem',
     textDecoration: 'none',
-    '&:hover': {
-      backgroundColor: 'blue',
-    },
   };
+
+  const getBorderColor = (path) =>
+    location.pathname === path ? '#1976D2' : 'transparent';
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -44,16 +45,16 @@ const Sidebar = () => {
           width: { sm: drawerWidth },
           flexShrink: { sm: 0 },
           borderRight: '0.5px solid #ccc',
-          backgroundColor: 'white',
+          backgroundColor: '#f3f6f8',
         }}
         aria-label="mailbox folders"
       >
         <div>
-          
           <Typography
             variant="h6"
             sx={{
               my: 1,
+              fontWeight: 'bold',
               padding: '1rem',
               borderBottom: '0.5px solid #ccc',
             }}
@@ -65,7 +66,10 @@ const Sidebar = () => {
               <ListItem
                 key="Account"
                 selected={location.pathname === '/profile'}
-                style={listItemStyle}
+                style={{
+                  ...listItemStyle,
+                  borderRight: `4px solid ${getBorderColor('/profile')}`,
+                }}
               >
                 <AccountCircleIcon />
                 <Typography
@@ -81,11 +85,14 @@ const Sidebar = () => {
               </ListItem>
             </Link>
 
-            <Link to="/profile" style={linkStyle}>
+            <Link to="/" style={linkStyle}>
               <ListItem
                 key="Inbox"
                 selected={location.pathname === '/'}
-                style={listItemStyle}
+                style={{
+                  ...listItemStyle,
+                  borderRight: `4px solid ${getBorderColor('/')}`,
+                }}
               >
                 <ChatIcon />
                 <Typography
@@ -104,7 +111,10 @@ const Sidebar = () => {
               <ListItem
                 key="Listings"
                 selected={location.pathname === '/MyItems'}
-                style={listItemStyle}
+                style={{
+                  ...listItemStyle,
+                  borderRight: `4px solid ${getBorderColor('/MyItems')}`,
+                }}
               >
                 <FormatListBulletedOutlinedIcon />
                 <Typography
@@ -124,9 +134,12 @@ const Sidebar = () => {
               <ListItem
                 key="Favorites"
                 selected={location.pathname === '/favorites'}
-                style={listItemStyle}
+                style={{
+                  ...listItemStyle,
+                  borderRight: `4px solid ${getBorderColor('/favorites')}`,
+                }}
               >
-                <DescriptionIcon />
+                <FavoriteBorderIcon />
                 <Typography
                   variant="h6"
                   sx={{
@@ -144,7 +157,10 @@ const Sidebar = () => {
               <ListItem
                 key="Add Products"
                 selected={location.pathname === '/addproducts'}
-                style={listItemStyle}
+                style={{
+                  ...listItemStyle,
+                  borderRight: `4px solid ${getBorderColor('/addproducts')}`,
+                }}
               >
                 <StorefrontOutlinedIcon />
                 <Typography

@@ -131,6 +131,14 @@ useEffect(() => {
         color: 'white',
         textTransform: 'none'
       }}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = '#4D4D4D';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = '#232323';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
+      }}
       variant="contained"
     >
       {fav ? 'Remove from Favorites' : 'Add to Favorites'}
@@ -146,6 +154,14 @@ useEffect(() => {
         marginTop: '25px',
         color: 'white',
         textTransform: 'none'
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = 'green';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = '#232323';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
       }}
       variant="contained"
     >

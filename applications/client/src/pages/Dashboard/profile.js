@@ -1,17 +1,30 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import {useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from '@mui/material/Avatar';
 import Sidebar from '../../components/sidebar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 export default function Account(props) {
-  let firstName =null;
-  firstName = localStorage.getItem('fullname');
-  const [email, setEmail] = useState();
-  const [profileUrl, setProfileUrl] = React.useState(localStorage.getItem('profile_url'));
+  const [email, setEmail] = useState('');
+  const [profileUrl, setProfileUrl] = useState(localStorage.getItem('profile_url'));
+  const firstName = localStorage.getItem('fullname') || 'User';
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const userResponse = await axios.post('http://localhost:4000/api/userinfo', { userId: props.user });
+        setEmail(userResponse.data.email);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserInfo();
+  }, [props.user]);
+
   const handleEditClick = () => {
     document.getElementById('avatar-input').click();
   };
@@ -21,81 +34,73 @@ export default function Account(props) {
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
     if (selected && ALLOWED_TYPES.includes(selected.type)) {
       try {
-      let reader = new FileReader();
-      reader.readAsDataURL(selected);
-          const formData = new FormData();
-          formData.append('image',selected);
-          formData.append('userId', props.user);
-          const result = await axios.post('http://localhost:4000/api/imgupload',formData,{headers:{'Content-Type':'multipart/form-data'}});
-          setProfileUrl(result.data.api2_profile_url); 
-          localStorage.setItem('profile_url', result.data.api2_profile_url);
-
-        } catch (error) {
-          console.error('Image upload error:', error);
-        }
-    } 
-  };
-
-
-const getUserInfo = async (e) => {
-  try{
-    const userResponse = await axios.post('http://localhost:4000/api/userinfo',{userId:props.user});
-    setEmail(userResponse.data.email);
+        const formData = new FormData();
+        formData.append('image', selected);
+        formData.append('userId', props.user);
+        const result = await axios.post('http://localhost:4000/api/imgupload', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        setProfileUrl(result.data.api2_profile_url);
+        localStorage.setItem('profile_url', result.data.api2_profile_url);
+      } catch (error) {
+        console.error('Image upload error:', error);
       }
- catch(err){
-  console.log(err);}}
-  getUserInfo()
+    }
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-    <Sidebar/>
-      <Box component="main">   
-      <label htmlFor="avatar-input">
-          <div style={{ position: 'relative', display: 'inline-block' }}>
-            <Avatar
-              sx={{
-                width: 150,
-                height: 150,
-                marginLeft: '29rem',
-                marginTop: '4rem',
-                color: 'white',
-                borderRadius: '12rem',
-                cursor: 'pointer',
-              }}
-              src={profileUrl}
-              alt="Profile"
-              onClick={handleEditClick}
-            />
-           
-            <input
-              id="avatar-input"
-              type="file"
-              accept="image/*, png, jpeg, jpg"
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                opacity: 0,
-                cursor: 'pointer',
-              }}
-              onChange={handleImageChange}
-            />
-            </div>
-            </label>
-
-        <Box sx={{ marginLeft: '2rem', marginTop: '2rem' }}>
-          <Typography margin="normal" variant="h5">Account Details</Typography>
-          <Typography margin="normal" variant="body1">
-            <strong>First Name:</strong> {firstName}
-          </Typography>
-          <Typography margin="normal" variant="body1">
-            <strong>Email:</strong> {email}
-          </Typography>
+      <Sidebar />
+      <Container component="main" sx={{ flexGrow: 1, py: 4 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', bgcolor: 'background.paper',  borderRadius: 2, p: 3, m: 2 }}>
+          <Avatar
+            sx={{
+              width: 150,
+              height: 150,
+              color: 'white',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              boxShadow: 1,
+              mb: 2,
+            }}
+            src={profileUrl}
+            alt="Profile"
+            onClick={handleEditClick}
+          />
+          <input
+            id="avatar-input"
+            type="file"
+            accept="image/*, png, jpeg, jpg"
+            style={{
+              display: 'none'
+            }}
+            onChange={handleImageChange}
+          />
+          <Box sx={{ width: '100%', mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 'bold', mb: 1, fontSize:'15px' }}
+            >
+              Profile Name
+            </Typography>
+            <Box sx={{ p: 2, border: '1px solid #ccc', borderRadius: 1}}>
+              {firstName}
+            </Box>
+          </Box>
+          <Box sx={{ width: '100%', mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 'bold', mb: 1, fontSize:'15px' }}
+            >
+              Email
+            </Typography>
+            <Box sx={{ p: 2, border: '1px solid #ccc', borderRadius: 1 }}>
+              {email}
+            </Box>
+          </Box>
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 }

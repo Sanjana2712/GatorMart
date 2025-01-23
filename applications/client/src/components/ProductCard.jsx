@@ -70,17 +70,27 @@ function ProductCard(props) {
       {renderImages}
      </Carousel></Link>
      <Card.Body>
-       <Card.Title><h5 style={{fontSize: "17px"}}>{props.Product.product_name} </h5> </Card.Title>
+       <Card.Title><h5 style={{fontSize: "17px",fontWeight:'bold'}}>{props.Product.product_name} </h5> </Card.Title>
      <h6>${`${props.Product.price}.00`} </h6>
      <Link to={`/product/${props.Product._id}`}>
-      <Button  variant="light" size='small'style={{ backgroundColor:"#3A3A39",color:'white',width:'100px',height:'35px',fontSize:'13px'}}>Connect</Button></Link>
+      <Button  variant="light" size='small'
+      style={{ backgroundColor:"#232323",color:'white',width:'100px',height:'35px',fontSize:'13px', fontWeight:'bold'}}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = 'green';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = '#232323';
+        e.target.style.color = 'white'; // Change text color to #191919 on hover
+      }}
+      >Connect</Button></Link>
      {/* {props.Product.listedBy !== props.user && <Button variant="light" size='small'style={{ backgroundColor:"#2F2F2E",background:"#2F2F2E",color:'white'}}>Connect</Button>} 
    */}
   {user_id ? (
    <Button
       onClick={fav ? () => removeFav(props.Product._id) : () => handleFav(props.Product._id)}
       style={{
-        backgroundColor: fav ? '#a31919' : '#3A3A39',
+        backgroundColor: fav ? '#a31919' : '#232323',
         width:'7.2rem',
         height:'34px',
         marginLeft:'3px',
