@@ -110,7 +110,6 @@ const AddProducts = () => {
   return (
      <div style={{ display: 'flex'}}> <Sidebar/><div className="create" style={{ flexGrow: 1, paddingTop:'2rem' }}>
      
-     <h2><b>Product Listing</b></h2>
      <form onSubmit={handleSubmit}style={{padding: "17px"}}>
   
        <label>Product Name:</label>

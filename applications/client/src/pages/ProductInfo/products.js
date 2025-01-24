@@ -121,28 +121,35 @@ useEffect(() => {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
   {props.user !== item.listedBy && user_id && (
-    <Button
-      onClick={fav ? () => removeFav(productId) : () => handleFav(productId)}
-      style={{
-        backgroundColor: fav ? '#a31919' : '#232323',
-        width: '48%',
-        height: '42px',
-        marginTop: fav ? '25px' : '25px',
-        color: 'white',
-        textTransform: 'none'
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.backgroundColor = '#4D4D4D';
-        e.target.style.color = 'white'; // Change text color to #191919 on hover
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.backgroundColor = '#232323';
-        e.target.style.color = 'white'; // Change text color to #191919 on hover
-      }}
-      variant="contained"
-    >
-      {fav ? 'Remove from Favorites' : 'Add to Favorites'}
-    </Button>
+   <Button
+   onClick={fav ? () => removeFav(productId) : () => handleFav(productId)}
+   style={{
+     backgroundColor: fav ? '#a31919' : '#232323',
+     width: '48%',
+     height: '42px',
+     marginTop: '25px',
+     color: 'white',
+     textTransform: 'none',
+     transition: 'background-color 0.3s', // Smooth transitions
+   }}
+   onMouseEnter={(e) => {
+     if (fav) {
+       e.target.style.backgroundColor = '#8B0000'; // Darker red for Remove from Favorites
+     } else {
+       e.target.style.backgroundColor = '#4D4D4D'; // Light grey for Add to Favorites
+     }
+   }}
+   onMouseLeave={(e) => {
+     if (fav) {
+       e.target.style.backgroundColor = '#a31919'; // Original red for Remove from Favorites
+     } else {
+       e.target.style.backgroundColor = '#232323'; // Original dark grey for Add to Favorites
+     }
+   }}
+   variant="contained"
+ >
+   {fav ? 'Remove from Favorites' : 'Add to Favorites'}
+ </Button>
   )}
 
   {props.user !== item.listedBy && (
