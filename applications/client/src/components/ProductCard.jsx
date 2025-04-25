@@ -111,11 +111,11 @@ function ProductCard(props) {
       style={{ backgroundColor:"#232323",color:'white',width:'100px',height:'35px',fontSize:'13px', fontWeight:'bold'}}
       onMouseEnter={(e) => {
         e.target.style.backgroundColor = 'green';
-        e.target.style.color = 'white'; // Change text color to #191919 on hover
+        e.target.style.color = 'white'; 
       }}
       onMouseLeave={(e) => {
         e.target.style.backgroundColor = '#232323';
-        e.target.style.color = 'white'; // Change text color to #191919 on hover
+        e.target.style.color = 'white'; 
       }}
       >Connect</Button></Link>
      {/* {props.Product.listedBy !== props.user && <Button variant="light" size='small'style={{ backgroundColor:"#2F2F2E",background:"#2F2F2E",color:'white'}}>Connect</Button>} 

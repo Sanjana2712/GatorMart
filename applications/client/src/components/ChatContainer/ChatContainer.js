@@ -11,13 +11,14 @@ import "./ChatContainer.css";
 
 const ChatContainer = (props) => {
   const [messages, setMessages] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef(null);
+  const [isOtherUserDeleted, setIsOtherUserDeleted] = useState(false);
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    if (inputValue.trim()) {
+    if (inputValue.trim() && !isOtherUserDeleted) {
       props.socket.emit("sendMessage", {
         roomId: props.activeRoom,
         content: inputValue.trim(),
@@ -32,11 +33,17 @@ const ChatContainer = (props) => {
       handleSendMessage(event);
     }
   };
+  
   const scrollDown = () => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "auto" });
     }
   };
+
+  // Check if other participant exists
+  useEffect(() => {
+    setIsOtherUserDeleted(!props.otherParticipant || !props.otherParticipant._id);
+  }, [props.otherParticipant]);
 
   useEffect(() => {
     const getAllMessages = async () => {
@@ -48,7 +55,6 @@ const ChatContainer = (props) => {
           }
         );
         setMessages(response.data.data || []);
-        scrollDown();
       } else {
         setMessages([]);
       }
@@ -64,18 +70,15 @@ const ChatContainer = (props) => {
     }
   }, [props.socket]);
 
-  useEffect(() => {
-    scrollDown();
-  }, [messages]);
 
-  const openModal = () => setIsModalOpen(true); // Function to open the modal
+  const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false); 
 
   return (
     <div className="chat-container">
       <div className="chat-header">
         <div className="header-info">
-          {props.otherParticipant && (
+          {props.otherParticipant && props.otherParticipant._id ? (
             <>
               <Avatar
                 src={props.otherParticipant.profile_url}
@@ -84,24 +87,37 @@ const ChatContainer = (props) => {
               />
               <h2 className="chat-room-title">{props.otherParticipant.name}</h2>
             </>
+          ) : (
+            <>
+              <Avatar
+                sx={{ width: 56, height: 56 }}
+                alt="Deleted User"
+              >?</Avatar>
+              <h2 className="chat-room-title">Deleted User</h2>
+            </>
           )}
         </div>
         <div className="header-actions">
-          <VideoCallIcon className="video-call-icon" onClick={openModal} />
+          {!isOtherUserDeleted && (
+            <VideoCallIcon className="video-call-icon" onClick={openModal} />
+          )}
           <DeleteIcon className="clear-chat-icon" onClick={() => {/* handle clear chat */}} />
         </div>
       </div>
       <div className="messages">
-        {messages?.map((msg, i) => (
-          <div
-            key={i}
-            className={`chat-bubble ${
-              msg.sender._id === props.user ? "user" : "friend"
-            }`}
-          >
-            {msg.content}
-          </div>
-        ))}
+        {messages?.map((msg, i) => {
+          // Check if sender exists before trying to access its properties
+          const isUserMessage = msg.sender && msg.sender._id === props.user;
+          return (
+            <div
+              key={i}
+              className={`chat-bubble ${isUserMessage ? "user" : "friend"}`}
+            >
+              {msg.content}
+              {!msg.sender}
+            </div>
+          );
+        })}
         <div ref={messagesEndRef} />{" "}
       </div>
       <div className="input-area">
@@ -110,35 +126,42 @@ const ChatContainer = (props) => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type a message..."
+          placeholder={isOtherUserDeleted ? "User does not exist" : "Type a message..."}
           className="message-input"
+          disabled={isOtherUserDeleted}
         />
-        <button onClick={handleSendMessage} className="send-button">
+        <button 
+          onClick={handleSendMessage} 
+          className={`send-button ${isOtherUserDeleted ? "disabled" : ""}`}
+          disabled={isOtherUserDeleted}
+        >
           Send
         </button>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-  <div className="video-call-interface">
-    <div className="local-video">
-      <h4 className="participant-name">You</h4>
-      <div className="video-placeholder">
-        <img src={localVideoSrc} alt="Your Video Stream" className="video-image" />
-      </div>
-    </div>
-    <div className="remote-video">
-      <h4 className="participant-name">{props.otherParticipant?.name}</h4>
-      <div className="video-placeholder">
-        <img src={remoteVideoSrc} alt={`${props.otherParticipant?.name}'s Video Stream`} className="video-image" />
-      </div>
-    </div>
-  </div>
-  <div className="end-call-button-container">
-    <button onClick={() => {/* handle end call logic here */}} className="end-call-button">
-      <CallEndIcon className="phone-icon" />
-    </button>
-  </div>
-</Modal>
-
+      
+      {!isOtherUserDeleted && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <div className="video-call-interface">
+            <div className="local-video">
+              <h4 className="participant-name">You</h4>
+              <div className="video-placeholder">
+                <img src={localVideoSrc} alt="Your Video Stream" className="video-image" />
+              </div>
+            </div>
+            <div className="remote-video">
+              <h4 className="participant-name">{props.otherParticipant?.name}</h4>
+              <div className="video-placeholder">
+                <img src={remoteVideoSrc} alt={`${props.otherParticipant?.name}'s Video Stream`} className="video-image" />
+              </div>
+            </div>
+          </div>
+          <div className="end-call-button-container">
+            <button onClick={() => {/* handle end call logic here */}} className="end-call-button">
+              <CallEndIcon className="phone-icon" />
+            </button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
