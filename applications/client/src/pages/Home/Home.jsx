@@ -1,25 +1,25 @@
-import React from 'react';
-import {useEffect, useState,useCallback} from 'react'
-import './Home.css'; 
-import MenuIcon from '@mui/icons-material/Menu';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import axios from 'axios';
-import Button from '@mui/material/Button';
-import SearchIcon from '@mui/icons-material/Search';
-import Toolbar from '@mui/material/Toolbar';
-import ProductCard from '../../components/ProductCard';
-import Grid from '@mui/material/Unstable_Grid2';
+import React from "react";
+import { useEffect, useState, useCallback } from "react";
+import "./Home.css";
+import MenuIcon from "@mui/icons-material/Menu";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import axios from "axios";
+import Button from "@mui/material/Button";
+import SearchIcon from "@mui/icons-material/Search";
+import Toolbar from "@mui/material/Toolbar";
+import ProductCard from "../../components/ProductCard";
+import Grid from "@mui/material/Unstable_Grid2";
 const drawerWidth = 240;
 const navItems = ['Electronics','Clothing','Kitchen','Furniture','Pets', 'Sports','Fitness','Automobiles','Healthcare','Donation'];
 
@@ -38,7 +38,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   color:'#9a9a9c',
@@ -54,22 +54,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 1),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
       },
     },
   },
 }));
 
 export default function Home(props) {
-  const [searchItem, setSearchItem] = useState('');
-  const [allProducts, setAllProducts] = useState(null)
+  const [searchItem, setSearchItem] = useState("");
+  const [allProducts, setAllProducts] = useState(null);
   const [allFavID, setAllFavID] = useState(null);
-  const[category,setCategory] = useState("All");
+  const [category, setCategory] = useState("All");
   const { window } = props;
   const user_id=props.user;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -81,7 +81,7 @@ export default function Home(props) {
   }
   const handleChangeSearch = (e)=>{        
     console.log(e.target.value);
-     setSearchItem(e.target.value);
+    setSearchItem(e.target.value);
   };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -118,14 +118,17 @@ export default function Home(props) {
       console.log(error);
    }},[user_id]);
 
-   useEffect(()=> {
+  useEffect(() => {
     getAllFav();
-  },[getAllFav]);
+  }, [getAllFav]);
 
 
 const getAllProducts = useCallback(async () => {
     try {
-      const response = await axios.post('http://localhost:4000/api/allproducts',{category:category,user:props.user});
+      const response = await axios.post(
+        "http://localhost:4000/api/allproducts",
+        { category: category, user: props.user }
+      );
       setAllProducts(response.data);
   } catch (error) {
       console.log(error)
@@ -144,7 +147,8 @@ const getAllProducts = useCallback(async () => {
     /* </Col> */}
     else{return <></>}
   });
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
   return (
    
 <div>
@@ -156,7 +160,7 @@ const getAllProducts = useCallback(async () => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -196,12 +200,10 @@ const getAllProducts = useCallback(async () => {
                 inputProps={{ 'aria-label': 'search' }}
                 value={searchItem}
                 onChange={(e)=>handleChangeSearch(e)}
-                />
-           
-         
+                />       
           </Search>
-          </Toolbar>
-          </AppBar>
+        </Toolbar>
+      </AppBar>
 
           <Grid style={{paddingLeft:'4rem'}} direction="row" sx={{ mt:4,mb:4}}alignItems="center" container rowSpacing={7} columns={25}>
     {productCards}

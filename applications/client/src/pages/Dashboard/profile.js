@@ -8,6 +8,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+
+
+const drawerWidth = 240;
+
 export default function Account(props) {
   const [email, setEmail] = useState('');
   const [profileUrl, setProfileUrl] = useState(localStorage.getItem('profile_url'));

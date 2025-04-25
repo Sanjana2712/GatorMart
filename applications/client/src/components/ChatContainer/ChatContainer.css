@@ -1,0 +1,180 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 700px; /* Full viewport height */
+  overflow: hidden; /* Prevent overflow of content outside the container */
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  position: sticky;
+  top: 0;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-room-title {
+  margin-left: 10px;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.video-call-icon,
+.clear-chat-icon {
+  margin-left: 15px;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.3s;
+}
+
+.video-call-icon:hover,
+.clear-chat-icon:hover {
+  color: rgb(28, 28, 28);
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.chat-bubble {
+  max-width: 40%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin: 5px 0;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.user {
+  background-color: rgb(28, 28, 28);
+  align-self: flex-end;
+  margin-left: auto;
+  color: white;
+  text-align: right;
+}
+
+.friend {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.message-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.send-button {
+  padding: 10px 15px;
+  border: none;
+  background-color: rgb(28, 28, 28);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: rgb(14, 14, 14);
+}
+.video-call-interface {
+  display: flex;
+  justify-content: space-between;
+  background-color: inherit;
+  margin: 20px 10px; 
+  padding: 14px;
+}
+.local-video, .remote-video {
+  width: 48%; 
+  background-color: #f0f0f0;
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px; /* Inner padding */
+  text-align: center; /* Center text */
+  height: 450px; /* Fixed height to maintain layout */
+  box-sizing: border-box; 
+}
+
+.video-placeholder {
+  height: calc(100% - 40px); 
+  background-color: #e0e0e0; 
+  display: flex; /* Flexbox to center content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  border-radius: 4px; /* Smooth rounded corners */
+}
+
+.video-image {
+  width: 100%; /* Make images responsive to fill the container */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100%; /* Restrict to box height to prevent overflow */
+  border-radius: 4px; /* Ensure images have rounded corners */
+}
+
+.participant-name {
+  font-size: 1.1em; /* Adjust font size for participant name */
+  margin-bottom: 10px; /* Space between the name and video */
+  color: #333; /* Darker color for visibility */
+  font-weight: 500; /* Slightly bolder */
+}
+
+/* Ensure the button container has enough space and is centered */
+.end-call-button-container {
+  display: flex;
+  justify-content: center; /* Center align container */
+  margin-top: 2px;
+  margin-bottom: 28px;
+}
+
+.end-call-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 56px; /* Fixed width for the button */
+  height: 56px; /* Fixed height for the button */
+  background-color: #922108; /* Red Color */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Makes the button circular */
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.end-call-button:hover {
+  background-color: #a32904; /* Darker shade on hover */
+  cursor: pointer;
+}
+
+.phone-icon {
+  font-size: 30px; /* Adjust icon size */
+}

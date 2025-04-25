@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const User = require('../models/User.js');
 const UserUnverified = require('../models/UserUnverified.js');
@@ -207,30 +207,34 @@ const sendVerificationEmail = async ({_id,email,uniqueString}, res) => {
         
         });
 
-    router.post('/api/imgupload', upload.single('image'), async (req, res) => {
-        try{
-            const file = req.file;
-            const result = await uploadFile(file);
-            await unlinkFile(file.path);
-            await User.findByIdAndUpdate(req.body.userId, { profile_url: result.Location });
-            const updatedUserInfo = await User.findById(req.body.userId);
-            res.status(200).json({status:'success', message:'Image uploaded Sucessfully',api2_profile_url:updatedUserInfo.profile_url })
-            
-        }
-            catch(err){
-                res.status(500).send(err);
-                console.log(err);
-        
-            }
-        });
+router.post("/api/imgupload", upload.single("image"), async (req, res) => {
+  try {
+    const file = req.file;
+    const result = await uploadFile(file);
+    await unlinkFile(file.path);
+    await User.findByIdAndUpdate(req.body.userId, {
+      profile_url: result.Location,
+    });
+    const updatedUserInfo = await User.findById(req.body.userId);
+    res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Image uploaded Sucessfully",
+        api2_profile_url: updatedUserInfo.profile_url,
+      });
+  } catch (err) {
+    res.status(500).send(err);
+    console.log(err);
+  }
+});
 
-    //change this approach
-    router.get('/api/image/:key', (req, res) => {
-        
-        const key = req.params.key;
-        const readStream = getFileStream(key);
-      
-        readStream.pipe(res)
-      })
-      
+//change this approach
+router.get("/api/image/:key", (req, res) => {
+  const key = req.params.key;
+  const readStream = getFileStream(key);
+
+  readStream.pipe(res);
+});
+
 module.exports = router;

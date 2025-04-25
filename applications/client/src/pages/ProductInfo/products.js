@@ -1,10 +1,16 @@
-import React,{useEffect,useState}from 'react';
-import Button from '@mui/material/Button';
-import './productdetails.css'
-import ThumbnailDetails from '../../components/ThumbnailDetails';
-import axios from 'axios';
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import Button from "@mui/material/Button";
+import "./productdetails.css";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import ThumbnailDetails from "../../components/ThumbnailDetails";
+import { color } from "@mui/system";
+import axios from "axios";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useParams, Link } from "react-router-dom";
-import Chip from '@mui/material/Chip';
+import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
 
 function ProductInfo(props) {
   const [fav, setFav] = useState(false);
@@ -18,27 +24,28 @@ function ProductInfo(props) {
 };
 const { productId } = useParams();
 
-useEffect(() => {
-  if (favorites && favorites.includes(productId)) {
-    setFav(true);
-  } else {
-    setFav(false);
-  }
-}, [productId, favorites]);
+  useEffect(() => {
+    if (favorites && favorites.includes(productId)) {
+      setFav(true);
+    } else {
+      setFav(false);
+    }
+  }, [productId, favorites]);
 
-  const [item, setItem] = useState( { product_name:"",
-    description: "", 
-    product_type: "", 
-   isDonation: "",
-   isCampusPickup: "",
-   pickup_addr: "",
-   listedBy: "",
-   isSold: "",
-   img_url:[],
-   price:""}
-    );
- 
-  const handleFav= async(id)=>{
+  const [item, setItem] = useState({
+    product_name: "",
+    description: "",
+    product_type: "",
+    isDonation: "",
+    isCampusPickup: "",
+    pickup_addr: "",
+    listedBy: "",
+    isSold: "",
+    img_url: [],
+    price: "",
+  });
+
+  const handleFav = async (id) => {
     try {
       const addFav = await axios.post('http://localhost:4000/api/addFav',{productId:id,user_id:user_id} );
       if(addFav.data.status === 'success'){
@@ -75,14 +82,13 @@ useEffect(() => {
         setAuthor((prev)=>{
           return {...prev, name ,profile_url};
         });
-        
-      }else{
-        const userResponse = await axios.post('http://localhost:4000/api/userinfo',{userId:productResponse.data.listedBy});
-        setAuthor(userResponse.data);
-       
       }
-    } else{const userResponse = await axios.post('http://localhost:4000/api/userinfo',{userId:productResponse.data.listedBy});
-    setAuthor(userResponse.data);
+    } else {
+      const userResponse = await axios.post(
+        "http://localhost:4000/api/userinfo",
+        { userId: productResponse.data.listedBy }
+      );
+      setAuthor(userResponse.data);
     }
   }
 
@@ -179,10 +185,8 @@ useEffect(() => {
 
       </div>
     </div>
-  </div>
-  
-  )
+    </div>
+  );
 }
-
 
 export default ProductInfo;

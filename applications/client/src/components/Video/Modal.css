@@ -1,0 +1,35 @@
+/* Modal.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is above other content */
+  }
+  .modal-content {
+    background: rgb(32, 31, 31); /* Soft light background color for the modal */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px; /* Internal padding for better spacing */
+    height: auto; /* Allow height to adjust based on content */
+    width: 1000px; /* Set width to accommodate video boxes */
+    max-width: 90%; /* Responsive max width */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Softer shadow for a gentle lift */
+    display: flex; /* Flex layout for stacking elements */
+    flex-direction: column; /* Stack contents vertically */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 25px;
+  }
+  

@@ -8,7 +8,7 @@ node_modules
 ./applications/server/.env
 ./applications/client/.env
 .env
-
+ls
 
 # Logs
 logs

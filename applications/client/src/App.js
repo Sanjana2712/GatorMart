@@ -1,4 +1,4 @@
-import React ,{useState}from "react";
+import React, { useState } from "react";
 import Navbar from "./components/navbar2";
 import "./App.css";
 import Home from "./pages/Home/Home";
@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Verify from "./pages/Login/Verify";
 import SignUp from "./pages/SignUp/SignUp";
-import Profile from "./pages/Dashboard/profile"
-import Favorites from "./pages/Dashboard/favorites"
+import Profile from "./pages/Dashboard/profile";
+import Favorites from "./pages/Dashboard/favorites";
 import AddProducts from "./pages/AddProducts/AddProducts";
 import ProductInfo from "./pages/ProductInfo/products";
 import MyItems from "./pages/MyProducts/MyItems";
 import Footer from "./components/footer";
+import Chat from "./pages/Dashboard/chat";
 
 function App() {
   const [user, setUser]= useState(localStorage.getItem('user_id'));
@@ -29,10 +30,12 @@ function App() {
         <Route path="/product/:productId" element={<ProductInfo user={user}/>} />
         <Route path="/MyItems" element={<MyItems user={user}/>} />   
         <Route path="/api/verify/:userId/:verificationToken" element={<Verify/>}/>
+        {user && (
+          <Route path="/inbox/:chatRoom" element={<Chat user={user} />} />
+        )}
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
-
   );
 }
 

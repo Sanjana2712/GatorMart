@@ -1,16 +1,18 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
-import List from '@mui/material/List';
-import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
-import ChatIcon from '@mui/icons-material/ChatOutlined';
-import ListItem from '@mui/material/ListItem';
-import DescriptionIcon from '@mui/icons-material/DescriptionOutlined';
-import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Link, useLocation } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
+import List from "@mui/material/List";
+import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
+import ChatIcon from "@mui/icons-material/ChatOutlined";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import DescriptionIcon from "@mui/icons-material/DescriptionOutlined";
+import AccountCircleIcon from "@mui/icons-material/AccountCircleOutlined";
+import ListItemText from "@mui/material/ListItemText";
+import { Link, useLocation } from "react-router-dom";
+import { Typography } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const drawerWidth = 280;
@@ -38,14 +40,14 @@ const Sidebar = () => {
     location.pathname === path ? '#1976D2' : 'transparent';
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Box
         sx={{
           width: { sm: drawerWidth },
           flexShrink: { sm: 0 },
           borderRight: '0.5px solid #ccc',
-          backgroundColor: '#f3f6f8',
+          backgroundColor: 'white',
         }}
         aria-label="mailbox folders"
       >
@@ -85,10 +87,10 @@ const Sidebar = () => {
               </ListItem>
             </Link>
 
-            <Link to="/" style={linkStyle}>
+            <Link to="/inbox/default" style={linkStyle}>
               <ListItem
                 key="Inbox"
-                selected={location.pathname === '/'}
+                selected={location.pathname === '/inbox/default'}
                 style={{
                   ...listItemStyle,
                   borderRight: `4px solid ${getBorderColor('/')}`,
@@ -107,6 +109,7 @@ const Sidebar = () => {
                 </Typography>
               </ListItem>
             </Link>
+
             <Link to="/MyItems" style={linkStyle}>
               <ListItem
                 key="Listings"
