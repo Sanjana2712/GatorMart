@@ -4,13 +4,10 @@ const router = express.Router();
 const fs = require('fs')
 const util = require('util')
 require('dotenv/config');
-
-
-
 router.post('/api/addFav', async (req, res) => {
     try {
         const productID = req.body.productId;
-        const userID=req.body.userId;
+        const userID=req.body.user_id;
         let favoritesEntry = await Favorites.findOne({ userID });
         if (!favoritesEntry) {
           favoritesEntry = new Favorites({ userID, products: [productID] });
@@ -34,10 +31,7 @@ router.post('/api/addFav', async (req, res) => {
         const productID = req.body.productId;
         const userID=req.body.user_id; 
         // Find the Favorites document by user_id and update it to remove productID
-        console.log("im in delete api");
         const favorites = await Favorites.findOne({userID:userID});
-        console.log(favorites.products);
-        console.log(productID);
         if (!favorites) {
           return res.status(404).json({ status: 'error', message: 'User not found' });
         }
@@ -52,11 +46,9 @@ router.post('/api/addFav', async (req, res) => {
           return res.status(404).json({ status: 'error', message: 'Product not found in favorites' });
         }
       } catch (err) {
-        console.error('Error:', err);
         return res.status(500).json({ status: 'error', message: 'Internal server error' });
       }
     });
     
 
     module.exports = router;
-

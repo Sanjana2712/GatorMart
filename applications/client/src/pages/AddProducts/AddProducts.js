@@ -1,4 +1,5 @@
 import Snackbar from '@mui/material/Snackbar';
+import { useNavigate } from 'react-router-dom';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import { useState } from "react";
@@ -11,6 +12,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const AddProducts = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType]= useState("");
@@ -49,12 +51,13 @@ const AddProducts = () => {
       setTitle(event.target.value);
     }
   };
- const ValidateDescr = event => {
-  var letter = /^[a-zA-Z0-9~@!;"#$^*()_+=[\]{}|\\,.?: -]*$/;
-  if((event.target.value.match(letter))){
-    setBody(event.target.value);
+  const ValidateDescr = event => {
+    const maxLength = 500; // Set desired maximum length here
+    var letter = /^[a-zA-Z0-9~@!;"#$^*()_+=[\]{}|\\,.?: -]*$/;
+    if(event.target.value.match(letter) && event.target.value.length <= maxLength){
+      setBody(event.target.value);
+    }
   }
- }
  const ValidatePickupAddr = (e) =>{
   var letter = /^[a-zA-Z0-9~@!;"#$^*()_+=[\]{}|\\,.?: -]*$/;
   if((e.target.value.match(letter)) && e.target.value.length<=280){
@@ -91,13 +94,14 @@ const AddProducts = () => {
       formData.append('isCampusPickup',pickup);
       formData.append('price',value);
       formData.append('pickup_addr',pickupAddr);
-      formData.append('listedBy',sessionStorage.getItem('user_id'));
+      formData.append('listedBy',localStorage.getItem('user_id'));
       const result = await axios.post('http://localhost:4000/api/addproduct',formData,{headers:{'Content-Type':'multipart/form-data'}});
       if(result.data.status === 'success'){
         displaySnackBar(result.data.status,result.data.message);
+        setTimeout(() => {
+          navigate("/MyItems"); // Redirect to listings page after snackbar
+        }, 2500); // Adjust delay as needed
       }
-     
-      
     }else {
       displaySnackBar('error','Invalid entries');
 
@@ -110,7 +114,6 @@ const AddProducts = () => {
   return (
      <div style={{ display: 'flex'}}> <Sidebar/><div className="create" style={{ flexGrow: 1, paddingTop:'2rem' }}>
      
-     <h2><b>Product Listing</b></h2>
      <form onSubmit={handleSubmit}style={{padding: "17px"}}>
   
        <label>Product Name:</label>

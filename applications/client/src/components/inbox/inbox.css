@@ -1,0 +1,49 @@
+.inboxcontainer {
+  min-width: 300px; /* Minimum width */
+  max-width: 22%; /* Allow it to be responsive */
+  height: 700px;
+  overflow-y: auto;
+  box-sizing: border-box; /* Include padding and border in total width/height */
+}
+
+.chat {
+  margin: 3px;
+  padding: 3px;
+  display: flex;
+  height: 70px; /* Fixed height for items */
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+.chat:hover {
+  background-color: #1c1c1c;
+  color: white;
+}
+.activeRoom {
+  background-color: #1c1c1c;
+  color: white;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .inboxcontainer {
+    height: 400px; /* Adjust height for smaller screens */
+  }
+  .chat {
+    height: 60px; /* Adjust item height if needed */
+    gap: 10px; /* Reduce gap for smaller screens */
+  }
+}
+
+@media (max-width: 400px) {
+  .inboxcontainer {
+    height: 300px; /* Further adjust height for very small screens */
+  }
+}

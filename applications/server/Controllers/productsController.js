@@ -11,12 +11,7 @@ require('dotenv/config');
 
 const { uploadFile, getFileStream } = require('../s3');
 
-
-
-
 // Middleware to parse JSON data
-
-
 
 router.post('/api/allproducts', async (req, res) => {
 try{
@@ -32,22 +27,18 @@ try{
     const Products = await Product.find({isSold:false, product_type:req.body.category,listedBy:{$nin:[req.body.user]}});
     return res.send(Products);
    }
-  
     }
     catch(err){
        return res.status(500).send(err);
         console.log(err);
-
     }
-//api for sending fav IDS, home page and prod cards use this api to transfer array of IDS
-//api for getting fav
 
 });
 
 router.post('/api/getFavID', async (req, res) => {
     try {
-        const user_id = req.body.user_id;
-        const favorites = await Favorites.findOne({ user_id });
+        const userID = req.body.user_id;
+        let favorites = await Favorites.findOne({ userID:userID });
         return res.status(200).json({ status: 'success', products: favorites.products });
         
       } catch (error) {
@@ -57,8 +48,8 @@ router.post('/api/getFavID', async (req, res) => {
 
     router.post('/api/myFav', async (req, res) => {
         try {
-            const user_id = req.body.user_id;
-            const favorites = await Favorites.findOne({ user_id });
+            const userID = req.body.user_id;
+            const favorites = await Favorites.findOne({ userID:userID });
             if (!favorites) {
                 return res.status(404).send('No favorites found for the user');
             }
@@ -94,8 +85,8 @@ router.post('/api/myproducts', async (req, res) => {
                 res.status(500).send(err);
                 console.log(err);
             }
-        
         });
+
     router.post('/api/marksold', async (req, res) => {
         try{
             const updateResult = await Product.findByIdAndUpdate(req.body.productId, {isSold:true});
@@ -109,6 +100,20 @@ router.post('/api/myproducts', async (req, res) => {
                return res.status(500).send("Unexpected Error Occured");
             }
         });
+
+        router.post('/api/markavail', async (req, res) => {
+            try{
+                const updateResult = await Product.findByIdAndUpdate(req.body.productId, {isSold:false});
+                if(updateResult === null){
+                return res.status(200).json({status:'warning', message:'Could not find this product' });
+                }
+                return res.status(200).json({status:'success', message:'Product properties updated successfully'  });
+            }
+                catch(err){
+                    console.log('reached here 5')
+                   return res.status(500).send("Unexpected Error Occured");
+                }
+            });
 
 router.post('/api/deleteproduct', async (req, res) => {
             try{

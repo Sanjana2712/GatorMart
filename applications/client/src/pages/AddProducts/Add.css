@@ -1,56 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-/* blog previews / list */
-.blog-preview {
-  padding: 10px 16px;
-  margin: 20px 0;
-  border-bottom: 1px solid #fafafa;
-}
-.blog-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+/* General Reset */
+* {
+  box-sizing: border-box;
 }
 
-.create {
-  padding-right: 300px;
-  padding-left: 100px;
-  padding-bottom: 2rem;
-  margin: 0 auto;
-  text-align: center;
-}
+/* Main Container for Add Products */
+
+/* Label Styles */
 .create label {
   text-align: left;
   display: block;
-  font-style: bold;
-  
+  font-weight: bold; /* Make labels bold */
+  margin: 1rem 0 0.5rem; /* Margin for spacing */
+  color: #333; /* Dark color for better readability */
 }
+
+/* Heading Styles */
 .create h2 {
-  font-size: 25px;
+  font-size: 28px; /* Slightly larger heading */
   color: #2f2f2f;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Reduce space below */
 }
+
+/* Input, Textarea, and Select Styles */
 .create input, .create textarea, .create select {
   width: 100%;
-  padding: 6px 10px;
+  padding: 10px; /* Increased padding for comfort */
   margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
+  border: 1px solid #ccc; /* Lighter border color */
+  border-radius: 5px; /* Slightly rounded input fields */
+  font-size: 1rem; /* Set a consistent font size */
+  transition: border-color 0.3s; /* Smooth border color change */
 }
+
+.create input:focus, .create textarea:focus, .create select:focus {
+  border-color: #2196F3; /* Highlight border when focused */
+  outline: none; /* Remove default outline */
+}
+
+/* Button Styles */
 .create button {
-  background: #1c1c1c;
+  background: #1c1c1c; /* Dark background */
   color: #fff;
   border: 0;
-  padding: 8px;
+  padding: 10px 20px; /* Increased padding for better click area */
   border-radius: 8px;
-  min-width: 38rem;
   cursor: pointer;
+  transition: background 0.3s; /* Smooth background transition */
 }
 
 .create button:hover {
-  background: #474747;
-  color: #fff;
-  border: 0;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
+  background: #474747; /* Slightly lighter on hover */
+}
+
+/* Button Responsive Adjustments */
+@media screen and (max-width: 650px) {
+  .create {
+    padding: 20px; /* Decrease side padding for small screens */
+  }
+}
+
+.create {
+  padding: 2rem; /* More padding around content */
+  margin: 0; /* Remove margin to stretch full width */
+  text-align: left; /* Align text to the left */
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 0; /* Remove borders for full width usage */
+  box-shadow: none; /* Remove shadow for a flat design */
+}
+
+/* Additional Styles for Larger Screens */
+@media (min-width: 1025px) {
+  .create {
+    width: 70vw; /* Full viewport width */
+    height: auto; /* Allow to expand as needed */
+    padding: 4rem; /* Consistent padding */
+  }
 }

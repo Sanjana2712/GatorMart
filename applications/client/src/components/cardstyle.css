@@ -1,7 +1,7 @@
 .img-container {
     position: relative; /* To maintain aspect ratio */
     width: 100%; /* Adjust as needed */
-    height: 10rem;
+    height: 12rem;
     overflow: hidden;
   }
  
@@ -22,11 +22,9 @@
   }
 
   .product-card {
-    width: 14.2rem !important; /* Set the desired width for the product card */
-    height: 17.8rem; /* Allow height to adjust based on content */
+    width: 16.9rem !important; 
+    height: 19.8rem;
     display: flex;
     flex-direction: column;
     border: rgb(220, 220, 220) solid 0.5px;
-     /* Add spacing between product cards */
-    /* Add other styles as needed */
   }

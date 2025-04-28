@@ -11,10 +11,10 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import './myitems.css';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import {Link} from 'react-router-dom';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -22,7 +22,7 @@ function MyItems() {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType]= useState("");
-  const user_id= sessionStorage.getItem("user_id");
+  const user_id= localStorage.getItem("user_id");
   const [allProducts, setAllProducts] = useState(null);
   const [toggle, setToggle] =useState(false);
   
@@ -31,7 +31,6 @@ function MyItems() {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
   const displaySnackBar = (messageType, message) => {
@@ -40,6 +39,56 @@ function MyItems() {
     setOpen(true);
  };
   
+ const handleSold= async(id)=>{
+  try {
+    const soldResult = await axios.post('http://localhost:4000/api/marksold',{productId:id});
+    if(soldResult.data.status === 'success'){
+      displaySnackBar(soldResult.data.status, soldResult.data.message);
+      setToggle((prevToggle)=>{
+        return !prevToggle;
+      });
+
+    }else{
+      displaySnackBar(soldResult.data.status, soldResult.data.message);
+    }
+} catch (error) {
+  displaySnackBar('error',error.response.data);
+ }  
+}
+
+const handleAvail= async(id)=>{
+  try {
+    const listResult = await axios.post('http://localhost:4000/api/markavail',{productId:id});
+    if(listResult.data.status === 'success'){
+      displaySnackBar(listResult.data.status, listResult.data.message);
+      setToggle((prevToggle)=>{
+        return !prevToggle;
+      });
+
+    }else{
+      displaySnackBar(listResult.data.status, listResult.data.message);
+    }
+} catch (error) {
+  displaySnackBar('error',error.response.data);
+ }  
+}
+
+const handleDelete= async(id)=>{
+try {
+  const deleteResult = await axios.post('http://localhost:4000/api/deleteproduct',{productId:id});
+  if(deleteResult.data.status === 'success' || deleteResult.data.status === 'warning' ){
+    displaySnackBar(deleteResult.data.status, deleteResult.data.message);
+    setToggle((prevToggle)=>{
+      return !prevToggle;
+    });
+  }else{
+    displaySnackBar(deleteResult.data.status, deleteResult.data.message);
+  }
+} catch (error) {
+displaySnackBar('error',error.response.data);
+}
+}
+
   const getAllProducts = useCallback(async () => {
     try {
       const response = await axios.post('http://localhost:4000/api/myproducts',{user_id:user_id});
@@ -57,112 +106,120 @@ const renderImage = (Product) => {
       return  (
          <Carousel.Item key={i}>
            <img alt='product-pic'
-            style={{height: '180px', width:'210px', float: "left"}}
+            style={{height: '160px', width:'190px', float: "left"}}
              src={val}
            />
          </Carousel.Item>
        )});
   }
 
-  const handleSold= async(id)=>{
-    try {
-      const soldResult = await axios.post('http://localhost:4000/api/marksold',{productId:id});
-      if(soldResult.data.status === 'success'){
-        displaySnackBar(soldResult.data.status, soldResult.data.message);
-        setToggle((prevToggle)=>{
-          return !prevToggle;
-        });
-
-      }else{
-        displaySnackBar(soldResult.data.status, soldResult.data.message);
-      }
-
-      
-  } catch (error) {
-    displaySnackBar('error',error.response.data);
-   }
   
-  }
+  const currentListed = allProducts?.map((Product, i) => {
+    if (!Product.isSold) {
+      return (
+        <div className='myprod' key={Product._id}>
+          <div className='myprodcard'>
+          <Carousel interval={null} style={{ float: "left", marginRight:'2.6%'}}>          
+          {renderImage(Product)}
+            </Carousel>
+            <h5><b>{Product.product_name}</b></h5>
+            <h6>${Product.price}</h6>
+            <Typography variant="body2" sx={{ color: '#757575' }}>Available.</Typography>
+            <Typography variant="body2" sx={{ color: '#757575' }}> 
+            Category: {Product.product_type} | Pickup: {Product.pickup_addr}
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '30px'}}>
+            <div style={{ display: 'flex', gap: '8px' }}>
 
-const handleDelete= async(id)=>{
-  try {
-    const deleteResult = await axios.post('http://localhost:4000/api/deleteproduct',{productId:id});
-    if(deleteResult.data.status === 'success' || deleteResult.data.status === 'warning' ){
-      displaySnackBar(deleteResult.data.status, deleteResult.data.message);
-      setToggle((prevToggle)=>{
-        return !prevToggle;
-      });
+            <Button onClick={() => { handleSold(Product._id); }}
+            className='responsiveButtons'
+            variant="contained"
+            style={{
+              backgroundColor: "#fdbbb3",fontWeight:'bold',
+              color: '#a5252c',fontSize:'0.98rem',padding:'3px 12px 4px 12px' 
+            }}> Mark as Sold </Button>
 
-    }else{
-      displaySnackBar(deleteResult.data.status, deleteResult.data.message);
+              <Link to={`/product/${Product._id}`}><Button
+                    className='responsiveButtons'
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#d3d4d5",fontWeight:'bold',
+                      color: 'black',fontSize:'0.98rem',padding:'3px 12px 4px 12px' 
+                    }} > Preview </Button> </Link>
+              
+                <Button
+                  onClick={() => { handleDelete(Product._id); }}
+                  className='responsiveButtons'
+                  variant="contained"
+                  style={{ backgroundColor: '#d3d4d5', color: 'black', fontWeight:'bold', fontSize:'0.98rem',padding:'3px 12px 4px 12px' }}
+                > Delete
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     }
-
-    
-} catch (error) {
-  displaySnackBar('error',error.response.data);
- }
-  }
+    return <React.Fragment key={Product._id} />;
+  });
   
-  
-
-  const currentListed = allProducts?.map((Product,i) => {
-    if (Product.isSold === false){
-      return (<div className='myprod'key={Product._id}>
-      <div className='myprodcard'  style={{justifyContent: 'center', alignItems:'center'}}>
-      <Carousel interval={null} style={{minHeight: '270px', maxHeight:'270px', maxWidth:'210px', float: "left", padding:"1rem 1rem 0rem"}}>
-  {renderImage(Product)}
-  </Carousel>
-       <h5>{Product.product_name}</h5>
-       <h6>Price: ${Product.price}</h6>
-         <p>{Product.description}</p>
-      
-      
-       <h6>Category: {Product.product_type}</h6>
-       <p><b>Pickup address:</b> {Product.pickup_addr}</p>
-       <Link to={`/product/${Product._id}`}>
-      <Button className='responsiveButtons'variant="contained" style={{float:"right",backgroundColor:"black",background:"black",color:'white',marginRight:'10px',paddingTop:'0.3rem',fontSize:'1.1rem'}}>View</Button></Link>
-       <Button onClick ={()=>{handleDelete(Product._id);}} className='responsiveButtons'variant="contained" style={{float:"right",backgroundColor:'black',color:'white'}}>Delete <DeleteIcon/></Button>
-      <Button onClick ={()=>{handleSold(Product._id);}}className='responsiveButtons1'variant="contained" style={{float:"right",backgroundColor:'green',color:'white',marginRight:'0.5rem'}}>Sold <CheckCircleIcon/> </Button>
-      </div>
-     </div>)
-    } 
-    return < React.Fragment key ={Product._id}/>;
- })
-
- const soldProduct = allProducts?.map((Product,i) => {
-  if (Product.isSold === true){
-    return  (<div className='myprod'key={Product._id}>
-    <div className='myprodcard'  style={{justifyContent: 'left', alignItems:'left'}}>
-    <Carousel interval={null} style={{minHeight: '220px', maxHeight:'250px', maxWidth:'210px', float: "left", padding:"1rem 1rem 0rem"}}>
-{renderImage(Product)}
-</Carousel>
-     <h5>{Product.product_name}</h5>
-     <h6>Price: ${Product.price}</h6>
-       <p>{Product.description}</p>
-    
-    
-     <h6>Category: {Product.product_type}</h6>
-     <p><b>Pickup address:</b> {Product.pickup_addr}</p>
-     <Link to={`/product/${Product._id}`}>
-      <Button className='responsiveButtons'size='big' variant="contained" style={{ float:"right",backgroundColor:"black",borderColor: "white",background:"black",color:'white',marginRight:'10px'}}>View</Button></Link>
-     <Button onClick ={()=>{handleDelete(Product._id);}} className='responsiveButtons'variant="contained" style={{float:"right",backgroundColor:'black',color:'white'}}>Delete <DeleteIcon/></Button>
-    
-    </div>
-   </div>)
-  }
-  return <React.Fragment key ={Product._id}/>;
-})
-
+  const soldProduct = allProducts?.map((Product, i) => {
+    if (Product.isSold) {
+      return (
+        <div className='myprod' key={Product._id}>
+          <div className='myprodcard'>
+            <Carousel interval={null} style={{ float: "left", marginRight:'2.6%'}}>
+              {renderImage(Product)}
+            </Carousel>
+            <h5><b>{Product.product_name}</b></h5>
+            <h6>${Product.price}</h6>
+            <Typography variant="body2" sx={{ color: '#757575' }}>Sold.</Typography>
+            <Typography variant="body2" sx={{ color: '#757575' }}>
+      Category: {Product.product_type} | Pickup: {Product.pickup_addr}</Typography>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '30px' }}>         
+              <div style={{ display: 'flex', gap: '8px' }}>
+              <Button onClick={() => { handleAvail(Product._id); }}
+                    className='responsiveButtons'
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#bee3f9",fontWeight:'bold',
+                      color: '#0f7abc',fontSize:'0.98rem',padding:'3px 12px 4px 12px' 
+                    }}
+                  >
+                    Relist this Item
+                  </Button>
+                <Link to={`/product/${Product._id}`}>
+                  <Button
+                    className='responsiveButtons'
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#d3d4d5",fontWeight:'bold',
+                      color: 'black',fontSize:'0.98rem',padding:'3px 12px 4px 12px' 
+                    }}
+                  >
+                    Preview 
+                  </Button>
+                </Link>
+                <Button
+                  onClick={() => { handleDelete(Product._id); }}
+                  className='responsiveButtons'
+                  variant="contained"
+                  style={{ backgroundColor: '#d3d4d5', color: 'black', fontWeight:'bold', fontSize:'0.98rem',padding:'3px 12px 4px 12px'   }}
+                > Delete 
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return <React.Fragment key={Product._id} />;
+  });
 
 return(
-  
     <div className="my-items-container">
       <Sidebar />
-
       <div className="content-container">
-      <Typography variant="h6" sx={{ my: 1,padding:'1rem', borderBottom: '0.5px solid #ccc',fontWeight:'semi-bold'}}>
-       Currently Listed
-      </Typography>
         <Grid
           direction="row"
           sx={{ mt: 4, mb: 4 }}
@@ -172,23 +229,9 @@ return(
           columns={24}
         >
           {currentListed}
-        </Grid>
-
-        <Typography variant="h6" sx={{ my: 1,paddingLeft: '3rem',padding:'1rem', borderBottom: '0.5px solid #ccc',fontWeight:'semi-bold'}}>
-       Sold 
-      </Typography>
-        <Grid
-          direction="row"
-          sx={{ mt: 4, mb: 4 }}
-          container
-          rowSpacing={3}
-          columnSpacing={2}
-          columns={24}
-        >
           {soldProduct}
         </Grid>
       </div>
-
       <Snackbar
         open={open}
         autoHideDuration={2000}
