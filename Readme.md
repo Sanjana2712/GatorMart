@@ -15,7 +15,7 @@
 
 🎬 **Demo**
 
-https://github.com/user-attachments/assets/71e8d201-c34e-4781-8341-aed5102f38be
+https://github.com/user-attachments/assets/0e455230-ce4e-4de2-ae34-6a3b1bc701b8
 
 ## 🛠️ Technologies Used
 ### Frontend
